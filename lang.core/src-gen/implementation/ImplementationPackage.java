@@ -140,13 +140,22 @@ public interface ImplementationPackage extends EPackage {
 	int EXTENDED_CLASS__ATTRIBUTES = 2;
 
 	/**
+	 * The feature id for the '<em><b>Extends</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXTENDED_CLASS__EXTENDS = 3;
+
+	/**
 	 * The number of structural features of the '<em>Extended Class</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXTENDED_CLASS_FEATURE_COUNT = 3;
+	int EXTENDED_CLASS_FEATURE_COUNT = 4;
 
 	/**
 	 * The number of operations of the '<em>Extended Class</em>' class.
@@ -1024,6 +1033,17 @@ public interface ImplementationPackage extends EPackage {
 	EReference getExtendedClass_Attributes();
 
 	/**
+	 * Returns the meta object for the reference list '{@link implementation.ExtendedClass#getExtends <em>Extends</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Extends</em>'.
+	 * @see implementation.ExtendedClass#getExtends()
+	 * @see #getExtendedClass()
+	 * @generated
+	 */
+	EReference getExtendedClass_Extends();
+
+	/**
 	 * Returns the meta object for class '{@link implementation.Behaviored <em>Behaviored</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1639,6 +1659,14 @@ public interface ImplementationPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EXTENDED_CLASS__ATTRIBUTES = eINSTANCE.getExtendedClass_Attributes();
+
+		/**
+		 * The meta object literal for the '<em><b>Extends</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXTENDED_CLASS__EXTENDS = eINSTANCE.getExtendedClass_Extends();
 
 		/**
 		 * The meta object literal for the '{@link implementation.impl.BehavioredImpl <em>Behaviored</em>}' class.

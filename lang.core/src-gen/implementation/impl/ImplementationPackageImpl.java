@@ -297,6 +297,15 @@ public class ImplementationPackageImpl extends EPackageImpl implements Implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getExtendedClass_Extends() {
+		return (EReference)extendedClassEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getBehaviored() {
 		return behavioredEClass;
 	}
@@ -778,6 +787,7 @@ public class ImplementationPackageImpl extends EPackageImpl implements Implement
 		createEReference(extendedClassEClass, EXTENDED_CLASS__BASE_CLASS);
 		createEReference(extendedClassEClass, EXTENDED_CLASS__METHODS);
 		createEReference(extendedClassEClass, EXTENDED_CLASS__ATTRIBUTES);
+		createEReference(extendedClassEClass, EXTENDED_CLASS__EXTENDS);
 
 		behavioredEClass = createEClass(BEHAVIORED);
 		createEReference(behavioredEClass, BEHAVIORED__BODY);
@@ -900,6 +910,7 @@ public class ImplementationPackageImpl extends EPackageImpl implements Implement
 		initEReference(getExtendedClass_BaseClass(), ecorePackage.getEClass(), null, "baseClass", null, 1, 1, ExtendedClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExtendedClass_Methods(), this.getBehaviored(), null, "methods", null, 0, -1, ExtendedClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExtendedClass_Attributes(), this.getVariableDeclaration(), null, "attributes", null, 0, -1, ExtendedClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExtendedClass_Extends(), this.getExtendedClass(), null, "extends", null, 0, -1, ExtendedClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(behavioredEClass, Behaviored.class, "Behaviored", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBehaviored_Body(), this.getBlock(), null, "body", null, 1, 1, Behaviored.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
