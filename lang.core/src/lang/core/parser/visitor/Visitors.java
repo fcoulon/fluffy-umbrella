@@ -27,7 +27,7 @@ import lang.core.parser.XtdAQLParser.RIfContext;
 import lang.core.parser.XtdAQLParser.ROperationContext;
 import lang.core.parser.XtdAQLParser.RParametersContext;
 import lang.core.parser.XtdAQLParser.RRootContext;
-import lang.core.parser.XtdAQLParser.RServiceContext;
+import lang.core.parser.XtdAQLParser.RImportServiceContext;
 import lang.core.parser.XtdAQLParser.RVariableContext;
 import lang.core.parser.XtdAQLParser.RWhileContext;
 import implementation.ExtendedClass;
@@ -97,20 +97,15 @@ public class Visitors {
 			}
 			
 			String typeName = null;
-			if(ctx.Ident().size() == 1){ // String type
+			
+			if(ctx.Qualified() == null){ // String type
 				typeName = ctx.children.get(0).toString();
 			}
 			else{
-				typeName = ctx.Ident(0).getText();
+				typeName = ctx.Qualified().getText();
 			}
 			
-			String name = null;
-			if(ctx.Ident().size() == 1){ 
-				name = ctx.Ident(0).getText();
-			}
-			else{
-				name = ctx.Ident(1).getText();
-			}
+			String name = ctx.Ident().getText();
 			
 			VariableDeclaration res = ModelBuilder.singleton.buildVariableDecl(
 				name,
@@ -292,21 +287,15 @@ public class Visitors {
 				.getText();
 			
 			String returnType = null;
-			if(ctx.Ident().size() == 1){ // String type
-				int index = ctx.children.indexOf(ctx.Ident(0)) - 1; // just before the name
+			if(ctx.Qualified() == null){ // String type
+				int index = ctx.children.indexOf(ctx.Ident()) - 1; // just before the name
 				returnType = ctx.children.get(index).toString();
 			}
 			else{
-				returnType = ctx.Ident(0).getText();
+				returnType = ctx.Qualified().getText();
 			}
 			
-			String operationName = null;
-			if(ctx.Ident().size() == 1){ 
-				operationName = ctx.Ident(0).getText();
-			}
-			else{
-				operationName = ctx.Ident(1).getText();
-			}
+			String operationName = ctx.Ident().getText();
 			
 			List<Parameter> parameters = new ArrayList<Parameter>();
 			if(ctx.rParameters() != null)
@@ -376,20 +365,15 @@ public class Visitors {
 		@Override
 		public Parameter visitRVariable(RVariableContext ctx) {
 			String typeName = null;
-			if(ctx.Ident().size() == 1){ // String type
+			if(ctx.Qualified() == null){ // String type
 				typeName = ctx.children.get(0).toString();
 			}
 			else{
-				typeName = ctx.Ident(0).getText();
+				typeName = ctx.Qualified().getText();
 			}
 			
-			String name = null;
-			if(ctx.Ident().size() == 1){ 
-				name = ctx.Ident(0).getText();
-			}
-			else{
-				name = ctx.Ident(1).getText();
-			}
+			String name = ctx.Ident().getText();
+			
 			Parameter res = ModelBuilder.singleton.buildParameter(typeName,name);
 			parseRes.getStartPositions().put(res,ctx.start.getStartIndex());
 			parseRes.getEndPositions().put(res,ctx.stop.getStopIndex());
@@ -407,7 +391,7 @@ public class Visitors {
 		
 		@Override
 		public ExtendedClass visitRClass(RClassContext ctx) {
-			String name = ctx.Ident().getText();
+			String name = ctx.Qualified().get(0).getText();
 			AttributeVisitor subVisitor1 = new AttributeVisitor(parseRes);
 			List<VariableDeclaration> attributes = 
 					ctx
@@ -446,20 +430,14 @@ public class Visitors {
 			}
 			
 			String typeName = null;
-			if(ctx.Ident().size() == 1){ // String type
+			if(ctx.Qualified() == null){ // String type
 				typeName = ctx.children.get(0).toString();
 			}
 			else{
-				typeName = ctx.Ident(0).getText();
+				typeName = ctx.Qualified().getText();
 			}
 			
-			String name = null;
-			if(ctx.Ident().size() == 1){ 
-				name = ctx.Ident(0).getText();
-			}
-			else{
-				name = ctx.Ident(1).getText();
-			}
+			String name = ctx.Ident().getText();
 					
 			VariableDeclaration res = ModelBuilder.singleton.buildVariableDecl(
 					name,
@@ -477,7 +455,7 @@ public class Visitors {
 	
 	static class ServiceVisitor extends XtdAQLBaseVisitor<String> {
 		@Override
-		public String visitRService(RServiceContext ctx) {
+		public String visitRImportService(RImportServiceContext ctx) {
 			String rawText = ctx.getText();
 			rawText = rawText.replaceFirst("use", "");
 			rawText = rawText.replaceFirst(";", "");
@@ -510,7 +488,7 @@ public class Visitors {
 			ServiceVisitor serviceVisitor = new ServiceVisitor();
 			res.getServices().addAll(
 					ctx
-					.rService()
+					.rImportService()
 					.stream()
 					.map(srv -> serviceVisitor.visit(srv))
 					.collect(Collectors.toList())

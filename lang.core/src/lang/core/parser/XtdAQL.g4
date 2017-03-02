@@ -16,19 +16,27 @@ LINECOMMENT : '//' ~[\r\n]* -> skip; //Line comment
  * Structure
  */
 
-rRoot : rImport* rService* rClass*
+rRoot : 
+	'behavior' Qualified
+	rImportSyntax*
+	rImportSemantic*
+	rImportService*
+	rClass*
 ;
 
-rImport : 'import' Ident ('.' Ident)* ';'
+rImportSyntax : 'import' 'syntax' STRING 'as' Ident ';'
 ;
 
-rService : 'use' Ident ('.' Ident)* ';'
+rImportSemantic : 'import' 'semantic' Qualified 'as' Ident '(' Ident '=>' Ident ')' ';'
 ;
 
-rClass : 'class' Ident '{' rAttribute* rOperation* '}'
+rImportService : 'import' 'service' Qualified ';'
+;
+
+rClass : 'class' Qualified ('extends' Qualified)? '{' rAttribute* rOperation* '}'
 ; 
 
-rOperation : (rTag)* ('def' | 'override') (Ident|'String') Ident '(' rParameters? ')' rBlock
+rOperation : (rTag)* ('def' | 'override') (Qualified|'String') Ident '(' rParameters? ')' rBlock
 ;
 
 rTag : '@'Ident
@@ -37,10 +45,10 @@ rTag : '@'Ident
 rParameters : rVariable (',' rVariable)*
 ;
 
-rVariable : (Ident|'String') Ident
+rVariable : (Qualified|'String') Ident
 ;
 
-rAttribute : (Ident|'String') Ident (':=' expression)? ';'
+rAttribute : (Qualified|'String') Ident (':=' expression)? ';'
 ;
 
 /*
@@ -55,7 +63,7 @@ rStatement : rVarDecl
 		| rExpression
 ;
 
-rVarDecl : (Ident|'String') Ident (':=' expression)? ';'
+rVarDecl : (Qualified|'String') Ident (':=' expression)? ';'
 ;
 
 rAssign : expression ':=' expression ';'
@@ -80,4 +88,7 @@ rExpression : expression ';'
 ;
 
 STRING :  '"' (.)*? '"'
+;
+
+Qualified : Ident ('.'Ident)*
 ;
