@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
@@ -271,6 +272,15 @@ public class ImplementationPackageImpl extends EPackageImpl implements Implement
 	 */
 	public EReference getModelBehavior_ImportSyntaxes() {
 		return (EReference)modelBehaviorEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getModelBehavior_Name() {
+		return (EAttribute)modelBehaviorEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -836,6 +846,7 @@ public class ImplementationPackageImpl extends EPackageImpl implements Implement
 		createEReference(modelBehaviorEClass, MODEL_BEHAVIOR__CLASS_EXTENSIONS);
 		createEAttribute(modelBehaviorEClass, MODEL_BEHAVIOR__SERVICES);
 		createEReference(modelBehaviorEClass, MODEL_BEHAVIOR__IMPORT_SYNTAXES);
+		createEAttribute(modelBehaviorEClass, MODEL_BEHAVIOR__NAME);
 
 		extendedClassEClass = createEClass(EXTENDED_CLASS);
 		createEReference(extendedClassEClass, EXTENDED_CLASS__BASE_CLASS);
@@ -939,6 +950,7 @@ public class ImplementationPackageImpl extends EPackageImpl implements Implement
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
+		EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
 		AstPackage theAstPackage = (AstPackage)EPackage.Registry.INSTANCE.getEPackage(AstPackage.eNS_URI);
 
 		// Create type parameters
@@ -965,6 +977,7 @@ public class ImplementationPackageImpl extends EPackageImpl implements Implement
 		initEReference(getModelBehavior_ClassExtensions(), this.getExtendedClass(), null, "classExtensions", null, 0, -1, ModelBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getModelBehavior_Services(), ecorePackage.getEString(), "services", null, 0, -1, ModelBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModelBehavior_ImportSyntaxes(), this.getImportSyntax(), null, "importSyntaxes", null, 0, -1, ModelBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getModelBehavior_Name(), theEcorePackage.getEString(), "name", null, 1, 1, ModelBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(extendedClassEClass, ExtendedClass.class, "ExtendedClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getExtendedClass_BaseClass(), ecorePackage.getEClass(), null, "baseClass", null, 1, 1, ExtendedClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
