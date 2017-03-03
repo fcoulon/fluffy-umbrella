@@ -14,10 +14,10 @@ import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
+import org.xtext.example.mydsl.myDsl.ImportSyntax;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 import org.xtext.example.mydsl.myDsl.rAttribute;
 import org.xtext.example.mydsl.myDsl.rClass;
-import org.xtext.example.mydsl.myDsl.rImportSyntax;
 import org.xtext.example.mydsl.myDsl.rOperation;
 import org.xtext.example.mydsl.myDsl.rParameters;
 import org.xtext.example.mydsl.myDsl.rRoot;
@@ -38,14 +38,14 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
 		if (epackage == MyDslPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
+			case MyDslPackage.IMPORT_SYNTAX:
+				sequence_rImportSyntax(context, (ImportSyntax) semanticObject); 
+				return; 
 			case MyDslPackage.RATTRIBUTE:
 				sequence_rAttribute(context, (rAttribute) semanticObject); 
 				return; 
 			case MyDslPackage.RCLASS:
 				sequence_rClass(context, (rClass) semanticObject); 
-				return; 
-			case MyDslPackage.RIMPORT_SYNTAX:
-				sequence_rImportSyntax(context, (rImportSyntax) semanticObject); 
 				return; 
 			case MyDslPackage.ROPERATION:
 				sequence_rOperation(context, (rOperation) semanticObject); 
@@ -69,7 +69,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     rAttribute returns rAttribute
 	 *
 	 * Constraint:
-	 *     (type=Ident name=Ident)
+	 *     (type=ID name=ID)
 	 */
 	protected void sequence_rAttribute(ISerializationContext context, rAttribute semanticObject) {
 		if (errorAcceptor != null) {
@@ -79,8 +79,8 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.RATTRIBUTE__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getRAttributeAccess().getTypeIdentTerminalRuleCall_0_0(), semanticObject.getType());
-		feeder.accept(grammarAccess.getRAttributeAccess().getNameIdentTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getRAttributeAccess().getTypeIDTerminalRuleCall_0_0(), semanticObject.getType());
+		feeder.accept(grammarAccess.getRAttributeAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	
@@ -90,7 +90,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     rClass returns rClass
 	 *
 	 * Constraint:
-	 *     (syntax=[rImportSyntax|ID] name=Ident attributes+=rAttribute* operations+=rOperation*)
+	 *     (syntax=[ImportSyntax|ID] name=ID attributes+=rAttribute* operations+=rOperation*)
 	 */
 	protected void sequence_rClass(ISerializationContext context, rClass semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -99,21 +99,21 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	
 	/**
 	 * Contexts:
-	 *     rImportSyntax returns rImportSyntax
+	 *     rImportSyntax returns ImportSyntax
 	 *
 	 * Constraint:
-	 *     (uri=STRING name=Ident)
+	 *     (uri=STRING name=ID)
 	 */
-	protected void sequence_rImportSyntax(ISerializationContext context, rImportSyntax semanticObject) {
+	protected void sequence_rImportSyntax(ISerializationContext context, ImportSyntax semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.RIMPORT_SYNTAX__URI) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.RIMPORT_SYNTAX__URI));
-			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.RIMPORT_SYNTAX__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.RIMPORT_SYNTAX__NAME));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.IMPORT_SYNTAX__URI) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.IMPORT_SYNTAX__URI));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.IMPORT_SYNTAX__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.IMPORT_SYNTAX__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getRImportSyntaxAccess().getUriSTRINGTerminalRuleCall_2_0(), semanticObject.getUri());
-		feeder.accept(grammarAccess.getRImportSyntaxAccess().getNameIdentTerminalRuleCall_4_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getRImportSyntaxAccess().getUriSTRINGTerminalRuleCall_3_0(), semanticObject.getUri());
+		feeder.accept(grammarAccess.getRImportSyntaxAccess().getNameIDTerminalRuleCall_5_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	
@@ -123,7 +123,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     rOperation returns rOperation
 	 *
 	 * Constraint:
-	 *     (type=Ident name=Ident paramList+=rParameters? body=rBlock)
+	 *     (type=ID name=ID paramList+=rParameters? body=rBlock)
 	 */
 	protected void sequence_rOperation(ISerializationContext context, rOperation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -159,7 +159,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     rVariable returns rVariable
 	 *
 	 * Constraint:
-	 *     (type=Ident name=Ident)
+	 *     (type=ID name=ID)
 	 */
 	protected void sequence_rVariable(ISerializationContext context, rVariable semanticObject) {
 		if (errorAcceptor != null) {
@@ -169,8 +169,8 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.RVARIABLE__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getRVariableAccess().getTypeIdentTerminalRuleCall_0_0(), semanticObject.getType());
-		feeder.accept(grammarAccess.getRVariableAccess().getNameIdentTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getRVariableAccess().getTypeIDTerminalRuleCall_0_0(), semanticObject.getType());
+		feeder.accept(grammarAccess.getRVariableAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	

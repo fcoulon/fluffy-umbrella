@@ -20,9 +20,9 @@ import org.eclipse.emf.ecore.util.EDataTypeEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.xtext.example.mydsl.myDsl.ImportSyntax;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 import org.xtext.example.mydsl.myDsl.rClass;
-import org.xtext.example.mydsl.myDsl.rImportSyntax;
 import org.xtext.example.mydsl.myDsl.rRoot;
 
 /**
@@ -72,7 +72,7 @@ public class rRootImpl extends MinimalEObjectImpl.Container implements rRoot
    * @generated
    * @ordered
    */
-  protected EList<rImportSyntax> syntaxes;
+  protected EList<ImportSyntax> syntaxes;
 
   /**
    * The cached value of the '{@link #getSemantics() <em>Semantics</em>}' attribute list.
@@ -153,11 +153,11 @@ public class rRootImpl extends MinimalEObjectImpl.Container implements rRoot
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<rImportSyntax> getSyntaxes()
+  public EList<ImportSyntax> getSyntaxes()
   {
     if (syntaxes == null)
     {
-      syntaxes = new EObjectContainmentEList<rImportSyntax>(rImportSyntax.class, this, MyDslPackage.RROOT__SYNTAXES);
+      syntaxes = new EObjectContainmentEList<ImportSyntax>(ImportSyntax.class, this, MyDslPackage.RROOT__SYNTAXES);
     }
     return syntaxes;
   }
@@ -262,7 +262,7 @@ public class rRootImpl extends MinimalEObjectImpl.Container implements rRoot
         return;
       case MyDslPackage.RROOT__SYNTAXES:
         getSyntaxes().clear();
-        getSyntaxes().addAll((Collection<? extends rImportSyntax>)newValue);
+        getSyntaxes().addAll((Collection<? extends ImportSyntax>)newValue);
         return;
       case MyDslPackage.RROOT__SEMANTICS:
         getSemantics().clear();

@@ -7,7 +7,7 @@ import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EPackage
 import org.eclipse.xtext.validation.Check
 import org.xtext.example.mydsl.myDsl.rRoot
-import org.xtext.example.mydsl.myDsl.rImportSyntax
+import org.xtext.example.mydsl.myDsl.ImportSyntax
 import org.xtext.example.mydsl.myDsl.rClass
 import org.xtext.example.mydsl.myDsl.MyDslPackage
 
@@ -28,7 +28,7 @@ class MyDslValidator extends AbstractMyDslValidator {
 	def checkLanguageSyntaxesNamesUniques(rRoot language) {
 		for (syntax : language.syntaxes) {
 			if (language.syntaxes.filter[s|s.name == syntax.name].length > 1) {
-				error('''Semantic name have to be unique''', syntax, MyDslPackage.Literals.RIMPORT_SYNTAX__NAME,
+				error('''Semantic name have to be unique''', syntax, MyDslPackage.Literals.IMPORT_SYNTAX__NAME,
 					DUPLICATE_SEMANTIC_NAME)
 			}
 		}
@@ -45,11 +45,11 @@ class MyDslValidator extends AbstractMyDslValidator {
 	}
 
 	@Check
-	def checkSyntax(rImportSyntax syntax) {
+	def checkSyntax(ImportSyntax syntax) {
 
 		val epackage = EPackage.Registry.INSTANCE.getEPackage(syntax.uri)
 		if (epackage == null) {
-			error('''No package «syntax.uri» found.''', MyDslPackage.Literals.RIMPORT_SYNTAX__URI, INVALID_URI)
+			error('''No package «syntax.uri» found.''', MyDslPackage.Literals.IMPORT_SYNTAX__URI, INVALID_URI)
 		}
 	}
 

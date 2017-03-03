@@ -4,7 +4,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="rRoot">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="behaviour" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="syntaxes" upperBound="-1"
-        eType="#//rImportSyntax" containment="true"/>
+        eType="#//ImportSyntax" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="semantics" unique="false"
         upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="services" unique="false"
@@ -12,12 +12,12 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="xtendedClasses" upperBound="-1"
         eType="#//rClass" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="rImportSyntax">
+  <eClassifiers xsi:type="ecore:EClass" name="ImportSyntax">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="rClass">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="syntax" eType="#//rImportSyntax"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="syntax" eType="#//ImportSyntax"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
         eType="#//rAttribute" containment="true"/>

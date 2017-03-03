@@ -10,24 +10,24 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.xtext.example.mydsl.myDsl.ImportSyntax;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
-import org.xtext.example.mydsl.myDsl.rImportSyntax;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>rImport Syntax</b></em>'.
+ * An implementation of the model object '<em><b>Import Syntax</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.rImportSyntaxImpl#getUri <em>Uri</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.rImportSyntaxImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.ImportSyntaxImpl#getUri <em>Uri</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.ImportSyntaxImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class rImportSyntaxImpl extends MinimalEObjectImpl.Container implements rImportSyntax
+public class ImportSyntaxImpl extends MinimalEObjectImpl.Container implements ImportSyntax
 {
   /**
    * The default value of the '{@link #getUri() <em>Uri</em>}' attribute.
@@ -74,7 +74,7 @@ public class rImportSyntaxImpl extends MinimalEObjectImpl.Container implements r
    * <!-- end-user-doc -->
    * @generated
    */
-  protected rImportSyntaxImpl()
+  protected ImportSyntaxImpl()
   {
     super();
   }
@@ -87,7 +87,7 @@ public class rImportSyntaxImpl extends MinimalEObjectImpl.Container implements r
   @Override
   protected EClass eStaticClass()
   {
-    return MyDslPackage.Literals.RIMPORT_SYNTAX;
+    return MyDslPackage.Literals.IMPORT_SYNTAX;
   }
 
   /**
@@ -110,7 +110,7 @@ public class rImportSyntaxImpl extends MinimalEObjectImpl.Container implements r
     String oldUri = uri;
     uri = newUri;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.RIMPORT_SYNTAX__URI, oldUri, uri));
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.IMPORT_SYNTAX__URI, oldUri, uri));
   }
 
   /**
@@ -133,7 +133,7 @@ public class rImportSyntaxImpl extends MinimalEObjectImpl.Container implements r
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.RIMPORT_SYNTAX__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.IMPORT_SYNTAX__NAME, oldName, name));
   }
 
   /**
@@ -146,9 +146,9 @@ public class rImportSyntaxImpl extends MinimalEObjectImpl.Container implements r
   {
     switch (featureID)
     {
-      case MyDslPackage.RIMPORT_SYNTAX__URI:
+      case MyDslPackage.IMPORT_SYNTAX__URI:
         return getUri();
-      case MyDslPackage.RIMPORT_SYNTAX__NAME:
+      case MyDslPackage.IMPORT_SYNTAX__NAME:
         return getName();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -164,10 +164,10 @@ public class rImportSyntaxImpl extends MinimalEObjectImpl.Container implements r
   {
     switch (featureID)
     {
-      case MyDslPackage.RIMPORT_SYNTAX__URI:
+      case MyDslPackage.IMPORT_SYNTAX__URI:
         setUri((String)newValue);
         return;
-      case MyDslPackage.RIMPORT_SYNTAX__NAME:
+      case MyDslPackage.IMPORT_SYNTAX__NAME:
         setName((String)newValue);
         return;
     }
@@ -184,10 +184,10 @@ public class rImportSyntaxImpl extends MinimalEObjectImpl.Container implements r
   {
     switch (featureID)
     {
-      case MyDslPackage.RIMPORT_SYNTAX__URI:
+      case MyDslPackage.IMPORT_SYNTAX__URI:
         setUri(URI_EDEFAULT);
         return;
-      case MyDslPackage.RIMPORT_SYNTAX__NAME:
+      case MyDslPackage.IMPORT_SYNTAX__NAME:
         setName(NAME_EDEFAULT);
         return;
     }
@@ -204,9 +204,9 @@ public class rImportSyntaxImpl extends MinimalEObjectImpl.Container implements r
   {
     switch (featureID)
     {
-      case MyDslPackage.RIMPORT_SYNTAX__URI:
+      case MyDslPackage.IMPORT_SYNTAX__URI:
         return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT.equals(uri);
-      case MyDslPackage.RIMPORT_SYNTAX__NAME:
+      case MyDslPackage.IMPORT_SYNTAX__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }
     return super.eIsSet(featureID);
@@ -231,4 +231,4 @@ public class rImportSyntaxImpl extends MinimalEObjectImpl.Container implements r
     return result.toString();
   }
 
-} //rImportSyntaxImpl
+} //ImportSyntaxImpl

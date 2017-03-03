@@ -15,33 +15,35 @@ rRoot :
 	xtendedClasses+=rClass*
 ;
 
-Qualified: Ident ('.'Ident);
+Qualified: ID ('.'ID)*;
 
-rImportSyntax : 'import' 'syntax' uri=STRING 'as' name=Ident ';'
+rImportSyntax returns ImportSyntax: 
+	{ImportSyntax}
+	'import' 'syntax' uri=STRING 'as' name=ID ';'
 ;
 
-rImportSemantic : 'import' 'semantic' Qualified 'as' Ident '(' Ident '=>' Ident ')' ';'
+rImportSemantic : 'import' 'semantic' Qualified 'as' ID '(' ID '=>' ID ')' ';'
 ;
 
 rImportService : 'import' 'service' Qualified ';'
 ;
 
-rClass : 'class' syntax=[rImportSyntax]'.'name=Ident '{' attributes+=rAttribute* operations+=rOperation* '}'
+rClass : 'class' (syntax=[ImportSyntax])'.'name=ID '{' attributes+=rAttribute* operations+=rOperation* '}'
 ; 
 
-rOperation : rTag* ('def' | 'override') type=Ident name=Ident '(' paramList+=rParameters? ')' body=rBlock
+rOperation : rTag* ('def' | 'override') type=ID name=ID '(' paramList+=rParameters? ')' body=rBlock
 ;
 
-rTag : '@'Ident
+rTag : '@'ID
 ;
 
 rParameters : params+=rVariable (',' params+=rVariable)*
 ;
 
-rVariable : type=Ident name=Ident
+rVariable : type=ID name=ID
 ;
 
-rAttribute : type=Ident name=Ident (':=' expression)? ';'
+rAttribute : type=ID name=ID (':=' expression)? ';'
 ;
 
 rStatement : rVarDecl 
@@ -52,13 +54,13 @@ rStatement : rVarDecl
 		| rExpression
 ;
 
-rVarDecl : Ident Ident (':=' expression)? ';'
+rVarDecl : ID ID (':=' expression)? ';'
 ;
 
 rAssign : expression ':=' expression ';'
 ;
 
-rForEach : 'for' '(' Ident  'in' rCollection ')' rBlock
+rForEach : 'for' '(' ID  'in' rCollection ')' rBlock
 ;
 
 rCollection : '[' INT '..' INT ']' | expression
@@ -88,7 +90,7 @@ recExpression :
 	(navigationSegment | MultOp expression | addOp expression | compOp expression | 'and' expression | 'or' expression | 'xor' expression | 'implies' expression) recExpression?
 ;
 
-navigationSegment :     '.'Ident
+navigationSegment :     '.'ID
 				      | '.' callExp
 				      | '->' callExp
 ;    
@@ -96,14 +98,14 @@ navigationSegment :     '.'Ident
 nonLeftRecExpression :
               'not' expression
 		     | '-' expression
-		     | Ident
+		     | ID
 		     | literal
 		     | '(' expression ')'
 		     | 'if' expression 'then' expression 'else' expression 'endif'
 		     | 'let' binding (',' binding)* 'in' expression
 ;
 
-binding : Ident (':' typeLiteral)? '=' expression
+binding : ID (':' typeLiteral)? '=' expression
 ;
 
 addOp: '+' | '-'
@@ -121,7 +123,7 @@ compOp :     '<='
 
 
 callExp :     collectionIterator '(' variableDefinition lambdaExpression ')'
-			| Ident'(' expressionSequence ')'
+			| ID'(' expressionSequence ')'
 ;
 
 lambdaExpression : expression
@@ -133,7 +135,7 @@ collectionIterator : 'select' | 'reject' | 'collect' | 'any' | 'exists' | 'forAl
 expressionSequence : (expression (',' expression)*)?
 ;
 
-variableDefinition : Ident (':' typeLiteral)? '|'
+variableDefinition : ID (':' typeLiteral)? '|'
 ;
 
 literal :    STRING
@@ -144,8 +146,8 @@ literal :    STRING
 		   |'null'
 		   |'Sequence{' expressionSequence '}'
 		   |'OrderedSet{' expressionSequence '}'
-		   | Ident '::' Ident '::' Ident
-		   | Ident '::' Ident ':'
+		   | ID '::' ID '::' ID
+		   | ID '::' ID ':'
 		   | typeLiteral
 ;
 
@@ -159,18 +161,12 @@ typeLiteral :   'String'
 		      | '{' classifierTypeRule ('|' classifierTypeRule)* '}'
 ;
 
-classifierTypeRule :   Ident '::' Ident
-				     | Ident ':' 
+classifierTypeRule :   ID '::' ID
+				     | ID ':' 
 ;
 
 terminal MultOp : '*' | '/'
 ;
 
-terminal Real : ('0'..'9')+'.'('0'..'9')+
-;
-
-terminal Ident : (Letter | '_') (Letter | '0'..'9' | '_')*
-;
-
-terminal Letter : ('a'..'z'|'A'..'Z')
+terminal Real : INT'.'INT
 ;

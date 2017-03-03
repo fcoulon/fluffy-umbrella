@@ -33,13 +33,13 @@ public interface MyDslFactory extends EFactory
   rRoot createrRoot();
 
   /**
-   * Returns a new object of class '<em>rImport Syntax</em>'.
+   * Returns a new object of class '<em>Import Syntax</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>rImport Syntax</em>'.
+   * @return a new object of class '<em>Import Syntax</em>'.
    * @generated
    */
-  rImportSyntax createrImportSyntax();
+  ImportSyntax createImportSyntax();
 
   /**
    * Returns a new object of class '<em>rClass</em>'.

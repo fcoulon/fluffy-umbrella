@@ -81,9 +81,9 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
         return createrRootAdapter();
       }
       @Override
-      public Adapter caserImportSyntax(rImportSyntax object)
+      public Adapter caseImportSyntax(ImportSyntax object)
       {
-        return createrImportSyntaxAdapter();
+        return createImportSyntaxAdapter();
       }
       @Override
       public Adapter caserClass(rClass object)
@@ -148,16 +148,16 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.rImportSyntax <em>rImport Syntax</em>}'.
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.ImportSyntax <em>Import Syntax</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.xtext.example.mydsl.myDsl.rImportSyntax
+   * @see org.xtext.example.mydsl.myDsl.ImportSyntax
    * @generated
    */
-  public Adapter createrImportSyntaxAdapter()
+  public Adapter createImportSyntaxAdapter()
   {
     return null;
   }

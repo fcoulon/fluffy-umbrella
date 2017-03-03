@@ -66,7 +66,7 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
     switch (eClass.getClassifierID())
     {
       case MyDslPackage.RROOT: return createrRoot();
-      case MyDslPackage.RIMPORT_SYNTAX: return createrImportSyntax();
+      case MyDslPackage.IMPORT_SYNTAX: return createImportSyntax();
       case MyDslPackage.RCLASS: return createrClass();
       case MyDslPackage.ROPERATION: return createrOperation();
       case MyDslPackage.RPARAMETERS: return createrParameters();
@@ -93,10 +93,10 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public rImportSyntax createrImportSyntax()
+  public ImportSyntax createImportSyntax()
   {
-    rImportSyntaxImpl rImportSyntax = new rImportSyntaxImpl();
-    return rImportSyntax;
+    ImportSyntaxImpl importSyntax = new ImportSyntaxImpl();
+    return importSyntax;
   }
 
   /**

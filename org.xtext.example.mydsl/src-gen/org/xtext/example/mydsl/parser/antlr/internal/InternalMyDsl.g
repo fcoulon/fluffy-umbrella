@@ -200,12 +200,12 @@ ruleQualified returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken
 	leaveRule();
 }:
 	(
-		this_Ident_0=RULE_IDENT
+		this_ID_0=RULE_ID
 		{
-			$current.merge(this_Ident_0);
+			$current.merge(this_ID_0);
 		}
 		{
-			newLeafNode(this_Ident_0, grammarAccess.getQualifiedAccess().getIdentTerminalRuleCall_0());
+			newLeafNode(this_ID_0, grammarAccess.getQualifiedAccess().getIDTerminalRuleCall_0());
 		}
 		(
 			kw='.'
@@ -213,14 +213,14 @@ ruleQualified returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken
 				$current.merge(kw);
 				newLeafNode(kw, grammarAccess.getQualifiedAccess().getFullStopKeyword_1_0());
 			}
-			this_Ident_2=RULE_IDENT
+			this_ID_2=RULE_ID
 			{
-				$current.merge(this_Ident_2);
+				$current.merge(this_ID_2);
 			}
 			{
-				newLeafNode(this_Ident_2, grammarAccess.getQualifiedAccess().getIdentTerminalRuleCall_1_1());
+				newLeafNode(this_ID_2, grammarAccess.getQualifiedAccess().getIDTerminalRuleCall_1_1());
 			}
-		)
+		)*
 	)
 ;
 
@@ -240,19 +240,29 @@ rulerImportSyntax returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0='import'
+		(
+			{
+				/* */
+			}
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getRImportSyntaxAccess().getImportSyntaxAction_0(),
+					$current);
+			}
+		)
+		otherlv_1='import'
 		{
-			newLeafNode(otherlv_0, grammarAccess.getRImportSyntaxAccess().getImportKeyword_0());
+			newLeafNode(otherlv_1, grammarAccess.getRImportSyntaxAccess().getImportKeyword_1());
 		}
-		otherlv_1='syntax'
+		otherlv_2='syntax'
 		{
-			newLeafNode(otherlv_1, grammarAccess.getRImportSyntaxAccess().getSyntaxKeyword_1());
+			newLeafNode(otherlv_2, grammarAccess.getRImportSyntaxAccess().getSyntaxKeyword_2());
 		}
 		(
 			(
-				lv_uri_2_0=RULE_STRING
+				lv_uri_3_0=RULE_STRING
 				{
-					newLeafNode(lv_uri_2_0, grammarAccess.getRImportSyntaxAccess().getUriSTRINGTerminalRuleCall_2_0());
+					newLeafNode(lv_uri_3_0, grammarAccess.getRImportSyntaxAccess().getUriSTRINGTerminalRuleCall_3_0());
 				}
 				{
 					if ($current==null) {
@@ -261,20 +271,20 @@ rulerImportSyntax returns [EObject current=null]
 					setWithLastConsumed(
 						$current,
 						"uri",
-						lv_uri_2_0,
+						lv_uri_3_0,
 						"org.eclipse.xtext.common.Terminals.STRING");
 				}
 			)
 		)
-		otherlv_3='as'
+		otherlv_4='as'
 		{
-			newLeafNode(otherlv_3, grammarAccess.getRImportSyntaxAccess().getAsKeyword_3());
+			newLeafNode(otherlv_4, grammarAccess.getRImportSyntaxAccess().getAsKeyword_4());
 		}
 		(
 			(
-				lv_name_4_0=RULE_IDENT
+				lv_name_5_0=RULE_ID
 				{
-					newLeafNode(lv_name_4_0, grammarAccess.getRImportSyntaxAccess().getNameIdentTerminalRuleCall_4_0());
+					newLeafNode(lv_name_5_0, grammarAccess.getRImportSyntaxAccess().getNameIDTerminalRuleCall_5_0());
 				}
 				{
 					if ($current==null) {
@@ -283,14 +293,14 @@ rulerImportSyntax returns [EObject current=null]
 					setWithLastConsumed(
 						$current,
 						"name",
-						lv_name_4_0,
-						"org.xtext.example.mydsl.MyDsl.Ident");
+						lv_name_5_0,
+						"org.eclipse.xtext.common.Terminals.ID");
 				}
 			)
 		)
-		otherlv_5=';'
+		otherlv_6=';'
 		{
-			newLeafNode(otherlv_5, grammarAccess.getRImportSyntaxAccess().getSemicolonKeyword_5());
+			newLeafNode(otherlv_6, grammarAccess.getRImportSyntaxAccess().getSemicolonKeyword_6());
 		}
 	)
 ;
@@ -336,36 +346,36 @@ rulerImportSemantic returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRul
 			$current.merge(kw);
 			newLeafNode(kw, grammarAccess.getRImportSemanticAccess().getAsKeyword_3());
 		}
-		this_Ident_4=RULE_IDENT
+		this_ID_4=RULE_ID
 		{
-			$current.merge(this_Ident_4);
+			$current.merge(this_ID_4);
 		}
 		{
-			newLeafNode(this_Ident_4, grammarAccess.getRImportSemanticAccess().getIdentTerminalRuleCall_4());
+			newLeafNode(this_ID_4, grammarAccess.getRImportSemanticAccess().getIDTerminalRuleCall_4());
 		}
 		kw='('
 		{
 			$current.merge(kw);
 			newLeafNode(kw, grammarAccess.getRImportSemanticAccess().getLeftParenthesisKeyword_5());
 		}
-		this_Ident_6=RULE_IDENT
+		this_ID_6=RULE_ID
 		{
-			$current.merge(this_Ident_6);
+			$current.merge(this_ID_6);
 		}
 		{
-			newLeafNode(this_Ident_6, grammarAccess.getRImportSemanticAccess().getIdentTerminalRuleCall_6());
+			newLeafNode(this_ID_6, grammarAccess.getRImportSemanticAccess().getIDTerminalRuleCall_6());
 		}
 		kw='=>'
 		{
 			$current.merge(kw);
 			newLeafNode(kw, grammarAccess.getRImportSemanticAccess().getEqualsSignGreaterThanSignKeyword_7());
 		}
-		this_Ident_8=RULE_IDENT
+		this_ID_8=RULE_ID
 		{
-			$current.merge(this_Ident_8);
+			$current.merge(this_ID_8);
 		}
 		{
-			newLeafNode(this_Ident_8, grammarAccess.getRImportSemanticAccess().getIdentTerminalRuleCall_8());
+			newLeafNode(this_ID_8, grammarAccess.getRImportSemanticAccess().getIDTerminalRuleCall_8());
 		}
 		kw=')'
 		{
@@ -456,7 +466,7 @@ rulerClass returns [EObject current=null]
 				}
 				otherlv_1=RULE_ID
 				{
-					newLeafNode(otherlv_1, grammarAccess.getRClassAccess().getSyntaxRImportSyntaxCrossReference_1_0());
+					newLeafNode(otherlv_1, grammarAccess.getRClassAccess().getSyntaxImportSyntaxCrossReference_1_0());
 				}
 			)
 		)
@@ -466,9 +476,9 @@ rulerClass returns [EObject current=null]
 		}
 		(
 			(
-				lv_name_3_0=RULE_IDENT
+				lv_name_3_0=RULE_ID
 				{
-					newLeafNode(lv_name_3_0, grammarAccess.getRClassAccess().getNameIdentTerminalRuleCall_3_0());
+					newLeafNode(lv_name_3_0, grammarAccess.getRClassAccess().getNameIDTerminalRuleCall_3_0());
 				}
 				{
 					if ($current==null) {
@@ -478,7 +488,7 @@ rulerClass returns [EObject current=null]
 						$current,
 						"name",
 						lv_name_3_0,
-						"org.xtext.example.mydsl.MyDsl.Ident");
+						"org.eclipse.xtext.common.Terminals.ID");
 				}
 			)
 		)
@@ -572,9 +582,9 @@ rulerOperation returns [EObject current=null]
 		)
 		(
 			(
-				lv_type_3_0=RULE_IDENT
+				lv_type_3_0=RULE_ID
 				{
-					newLeafNode(lv_type_3_0, grammarAccess.getROperationAccess().getTypeIdentTerminalRuleCall_2_0());
+					newLeafNode(lv_type_3_0, grammarAccess.getROperationAccess().getTypeIDTerminalRuleCall_2_0());
 				}
 				{
 					if ($current==null) {
@@ -584,15 +594,15 @@ rulerOperation returns [EObject current=null]
 						$current,
 						"type",
 						lv_type_3_0,
-						"org.xtext.example.mydsl.MyDsl.Ident");
+						"org.eclipse.xtext.common.Terminals.ID");
 				}
 			)
 		)
 		(
 			(
-				lv_name_4_0=RULE_IDENT
+				lv_name_4_0=RULE_ID
 				{
-					newLeafNode(lv_name_4_0, grammarAccess.getROperationAccess().getNameIdentTerminalRuleCall_3_0());
+					newLeafNode(lv_name_4_0, grammarAccess.getROperationAccess().getNameIDTerminalRuleCall_3_0());
 				}
 				{
 					if ($current==null) {
@@ -602,7 +612,7 @@ rulerOperation returns [EObject current=null]
 						$current,
 						"name",
 						lv_name_4_0,
-						"org.xtext.example.mydsl.MyDsl.Ident");
+						"org.eclipse.xtext.common.Terminals.ID");
 				}
 			)
 		)
@@ -676,12 +686,12 @@ rulerTag returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 			$current.merge(kw);
 			newLeafNode(kw, grammarAccess.getRTagAccess().getCommercialAtKeyword_0());
 		}
-		this_Ident_1=RULE_IDENT
+		this_ID_1=RULE_ID
 		{
-			$current.merge(this_Ident_1);
+			$current.merge(this_ID_1);
 		}
 		{
-			newLeafNode(this_Ident_1, grammarAccess.getRTagAccess().getIdentTerminalRuleCall_1());
+			newLeafNode(this_ID_1, grammarAccess.getRTagAccess().getIDTerminalRuleCall_1());
 		}
 	)
 ;
@@ -767,9 +777,9 @@ rulerVariable returns [EObject current=null]
 	(
 		(
 			(
-				lv_type_0_0=RULE_IDENT
+				lv_type_0_0=RULE_ID
 				{
-					newLeafNode(lv_type_0_0, grammarAccess.getRVariableAccess().getTypeIdentTerminalRuleCall_0_0());
+					newLeafNode(lv_type_0_0, grammarAccess.getRVariableAccess().getTypeIDTerminalRuleCall_0_0());
 				}
 				{
 					if ($current==null) {
@@ -779,15 +789,15 @@ rulerVariable returns [EObject current=null]
 						$current,
 						"type",
 						lv_type_0_0,
-						"org.xtext.example.mydsl.MyDsl.Ident");
+						"org.eclipse.xtext.common.Terminals.ID");
 				}
 			)
 		)
 		(
 			(
-				lv_name_1_0=RULE_IDENT
+				lv_name_1_0=RULE_ID
 				{
-					newLeafNode(lv_name_1_0, grammarAccess.getRVariableAccess().getNameIdentTerminalRuleCall_1_0());
+					newLeafNode(lv_name_1_0, grammarAccess.getRVariableAccess().getNameIDTerminalRuleCall_1_0());
 				}
 				{
 					if ($current==null) {
@@ -797,7 +807,7 @@ rulerVariable returns [EObject current=null]
 						$current,
 						"name",
 						lv_name_1_0,
-						"org.xtext.example.mydsl.MyDsl.Ident");
+						"org.eclipse.xtext.common.Terminals.ID");
 				}
 			)
 		)
@@ -822,9 +832,9 @@ rulerAttribute returns [EObject current=null]
 	(
 		(
 			(
-				lv_type_0_0=RULE_IDENT
+				lv_type_0_0=RULE_ID
 				{
-					newLeafNode(lv_type_0_0, grammarAccess.getRAttributeAccess().getTypeIdentTerminalRuleCall_0_0());
+					newLeafNode(lv_type_0_0, grammarAccess.getRAttributeAccess().getTypeIDTerminalRuleCall_0_0());
 				}
 				{
 					if ($current==null) {
@@ -834,15 +844,15 @@ rulerAttribute returns [EObject current=null]
 						$current,
 						"type",
 						lv_type_0_0,
-						"org.xtext.example.mydsl.MyDsl.Ident");
+						"org.eclipse.xtext.common.Terminals.ID");
 				}
 			)
 		)
 		(
 			(
-				lv_name_1_0=RULE_IDENT
+				lv_name_1_0=RULE_ID
 				{
-					newLeafNode(lv_name_1_0, grammarAccess.getRAttributeAccess().getNameIdentTerminalRuleCall_1_0());
+					newLeafNode(lv_name_1_0, grammarAccess.getRAttributeAccess().getNameIDTerminalRuleCall_1_0());
 				}
 				{
 					if ($current==null) {
@@ -852,7 +862,7 @@ rulerAttribute returns [EObject current=null]
 						$current,
 						"name",
 						lv_name_1_0,
-						"org.xtext.example.mydsl.MyDsl.Ident");
+						"org.eclipse.xtext.common.Terminals.ID");
 				}
 			)
 		)
@@ -979,19 +989,19 @@ rulerVarDecl returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken(
 	leaveRule();
 }:
 	(
-		this_Ident_0=RULE_IDENT
+		this_ID_0=RULE_ID
 		{
-			$current.merge(this_Ident_0);
+			$current.merge(this_ID_0);
 		}
 		{
-			newLeafNode(this_Ident_0, grammarAccess.getRVarDeclAccess().getIdentTerminalRuleCall_0());
+			newLeafNode(this_ID_0, grammarAccess.getRVarDeclAccess().getIDTerminalRuleCall_0());
 		}
-		this_Ident_1=RULE_IDENT
+		this_ID_1=RULE_ID
 		{
-			$current.merge(this_Ident_1);
+			$current.merge(this_ID_1);
 		}
 		{
-			newLeafNode(this_Ident_1, grammarAccess.getRVarDeclAccess().getIdentTerminalRuleCall_1());
+			newLeafNode(this_ID_1, grammarAccess.getRVarDeclAccess().getIDTerminalRuleCall_1());
 		}
 		(
 			kw=':='
@@ -1093,12 +1103,12 @@ rulerForEach returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken(
 			$current.merge(kw);
 			newLeafNode(kw, grammarAccess.getRForEachAccess().getLeftParenthesisKeyword_1());
 		}
-		this_Ident_2=RULE_IDENT
+		this_ID_2=RULE_ID
 		{
-			$current.merge(this_Ident_2);
+			$current.merge(this_ID_2);
 		}
 		{
-			newLeafNode(this_Ident_2, grammarAccess.getRForEachAccess().getIdentTerminalRuleCall_2());
+			newLeafNode(this_ID_2, grammarAccess.getRForEachAccess().getIDTerminalRuleCall_2());
 		}
 		kw='in'
 		{
@@ -1650,12 +1660,12 @@ rulenavigationSegment returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 				$current.merge(kw);
 				newLeafNode(kw, grammarAccess.getNavigationSegmentAccess().getFullStopKeyword_0_0());
 			}
-			this_Ident_1=RULE_IDENT
+			this_ID_1=RULE_ID
 			{
-				$current.merge(this_Ident_1);
+				$current.merge(this_ID_1);
 			}
 			{
-				newLeafNode(this_Ident_1, grammarAccess.getNavigationSegmentAccess().getIdentTerminalRuleCall_0_1());
+				newLeafNode(this_ID_1, grammarAccess.getNavigationSegmentAccess().getIDTerminalRuleCall_0_1());
 			}
 		)
 		    |
@@ -1749,12 +1759,12 @@ rulenonLeftRecExpression returns [AntlrDatatypeRuleToken current=new AntlrDataty
 			}
 		)
 		    |
-		this_Ident_4=RULE_IDENT
+		this_ID_4=RULE_ID
 		{
-			$current.merge(this_Ident_4);
+			$current.merge(this_ID_4);
 		}
 		{
-			newLeafNode(this_Ident_4, grammarAccess.getNonLeftRecExpressionAccess().getIdentTerminalRuleCall_2());
+			newLeafNode(this_ID_4, grammarAccess.getNonLeftRecExpressionAccess().getIDTerminalRuleCall_2());
 		}
 		    |
 		{
@@ -1912,12 +1922,12 @@ rulebinding returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()
 	leaveRule();
 }:
 	(
-		this_Ident_0=RULE_IDENT
+		this_ID_0=RULE_ID
 		{
-			$current.merge(this_Ident_0);
+			$current.merge(this_ID_0);
 		}
 		{
-			newLeafNode(this_Ident_0, grammarAccess.getBindingAccess().getIdentTerminalRuleCall_0());
+			newLeafNode(this_ID_0, grammarAccess.getBindingAccess().getIDTerminalRuleCall_0());
 		}
 		(
 			kw=':'
@@ -2110,12 +2120,12 @@ rulecallExp returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()
 		)
 		    |
 		(
-			this_Ident_5=RULE_IDENT
+			this_ID_5=RULE_ID
 			{
-				$current.merge(this_Ident_5);
+				$current.merge(this_ID_5);
 			}
 			{
-				newLeafNode(this_Ident_5, grammarAccess.getCallExpAccess().getIdentTerminalRuleCall_1_0());
+				newLeafNode(this_ID_5, grammarAccess.getCallExpAccess().getIDTerminalRuleCall_1_0());
 			}
 			kw='('
 			{
@@ -2308,12 +2318,12 @@ rulevariableDefinition returns [AntlrDatatypeRuleToken current=new AntlrDatatype
 	leaveRule();
 }:
 	(
-		this_Ident_0=RULE_IDENT
+		this_ID_0=RULE_ID
 		{
-			$current.merge(this_Ident_0);
+			$current.merge(this_ID_0);
 		}
 		{
-			newLeafNode(this_Ident_0, grammarAccess.getVariableDefinitionAccess().getIdentTerminalRuleCall_0());
+			newLeafNode(this_ID_0, grammarAccess.getVariableDefinitionAccess().getIDTerminalRuleCall_0());
 		}
 		(
 			kw=':'
@@ -2445,58 +2455,58 @@ ruleliteral returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()
 		)
 		    |
 		(
-			this_Ident_12=RULE_IDENT
+			this_ID_12=RULE_ID
 			{
-				$current.merge(this_Ident_12);
+				$current.merge(this_ID_12);
 			}
 			{
-				newLeafNode(this_Ident_12, grammarAccess.getLiteralAccess().getIdentTerminalRuleCall_8_0());
+				newLeafNode(this_ID_12, grammarAccess.getLiteralAccess().getIDTerminalRuleCall_8_0());
 			}
 			kw='::'
 			{
 				$current.merge(kw);
 				newLeafNode(kw, grammarAccess.getLiteralAccess().getColonColonKeyword_8_1());
 			}
-			this_Ident_14=RULE_IDENT
+			this_ID_14=RULE_ID
 			{
-				$current.merge(this_Ident_14);
+				$current.merge(this_ID_14);
 			}
 			{
-				newLeafNode(this_Ident_14, grammarAccess.getLiteralAccess().getIdentTerminalRuleCall_8_2());
+				newLeafNode(this_ID_14, grammarAccess.getLiteralAccess().getIDTerminalRuleCall_8_2());
 			}
 			kw='::'
 			{
 				$current.merge(kw);
 				newLeafNode(kw, grammarAccess.getLiteralAccess().getColonColonKeyword_8_3());
 			}
-			this_Ident_16=RULE_IDENT
+			this_ID_16=RULE_ID
 			{
-				$current.merge(this_Ident_16);
+				$current.merge(this_ID_16);
 			}
 			{
-				newLeafNode(this_Ident_16, grammarAccess.getLiteralAccess().getIdentTerminalRuleCall_8_4());
+				newLeafNode(this_ID_16, grammarAccess.getLiteralAccess().getIDTerminalRuleCall_8_4());
 			}
 		)
 		    |
 		(
-			this_Ident_17=RULE_IDENT
+			this_ID_17=RULE_ID
 			{
-				$current.merge(this_Ident_17);
+				$current.merge(this_ID_17);
 			}
 			{
-				newLeafNode(this_Ident_17, grammarAccess.getLiteralAccess().getIdentTerminalRuleCall_9_0());
+				newLeafNode(this_ID_17, grammarAccess.getLiteralAccess().getIDTerminalRuleCall_9_0());
 			}
 			kw='::'
 			{
 				$current.merge(kw);
 				newLeafNode(kw, grammarAccess.getLiteralAccess().getColonColonKeyword_9_1());
 			}
-			this_Ident_19=RULE_IDENT
+			this_ID_19=RULE_ID
 			{
-				$current.merge(this_Ident_19);
+				$current.merge(this_ID_19);
 			}
 			{
-				newLeafNode(this_Ident_19, grammarAccess.getLiteralAccess().getIdentTerminalRuleCall_9_2());
+				newLeafNode(this_ID_19, grammarAccess.getLiteralAccess().getIDTerminalRuleCall_9_2());
 			}
 			kw=':'
 			{
@@ -2674,34 +2684,34 @@ ruleclassifierTypeRule returns [AntlrDatatypeRuleToken current=new AntlrDatatype
 }:
 	(
 		(
-			this_Ident_0=RULE_IDENT
+			this_ID_0=RULE_ID
 			{
-				$current.merge(this_Ident_0);
+				$current.merge(this_ID_0);
 			}
 			{
-				newLeafNode(this_Ident_0, grammarAccess.getClassifierTypeRuleAccess().getIdentTerminalRuleCall_0_0());
+				newLeafNode(this_ID_0, grammarAccess.getClassifierTypeRuleAccess().getIDTerminalRuleCall_0_0());
 			}
 			kw='::'
 			{
 				$current.merge(kw);
 				newLeafNode(kw, grammarAccess.getClassifierTypeRuleAccess().getColonColonKeyword_0_1());
 			}
-			this_Ident_2=RULE_IDENT
+			this_ID_2=RULE_ID
 			{
-				$current.merge(this_Ident_2);
+				$current.merge(this_ID_2);
 			}
 			{
-				newLeafNode(this_Ident_2, grammarAccess.getClassifierTypeRuleAccess().getIdentTerminalRuleCall_0_2());
+				newLeafNode(this_ID_2, grammarAccess.getClassifierTypeRuleAccess().getIDTerminalRuleCall_0_2());
 			}
 		)
 		    |
 		(
-			this_Ident_3=RULE_IDENT
+			this_ID_3=RULE_ID
 			{
-				$current.merge(this_Ident_3);
+				$current.merge(this_ID_3);
 			}
 			{
-				newLeafNode(this_Ident_3, grammarAccess.getClassifierTypeRuleAccess().getIdentTerminalRuleCall_1_0());
+				newLeafNode(this_ID_3, grammarAccess.getClassifierTypeRuleAccess().getIDTerminalRuleCall_1_0());
 			}
 			kw=':'
 			{
@@ -2714,11 +2724,7 @@ ruleclassifierTypeRule returns [AntlrDatatypeRuleToken current=new AntlrDatatype
 
 RULE_MULTOP : ('*'|'/');
 
-RULE_REAL : ('0'..'9')+ '.' ('0'..'9')+;
-
-RULE_IDENT : (RULE_LETTER|'_') (RULE_LETTER|'0'..'9'|'_')*;
-
-fragment RULE_LETTER : ('a'..'z'|'A'..'Z');
+RULE_REAL : RULE_INT '.' RULE_INT;
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 

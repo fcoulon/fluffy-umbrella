@@ -57,7 +57,7 @@ public interface rRoot extends EObject
 
   /**
    * Returns the value of the '<em><b>Syntaxes</b></em>' containment reference list.
-   * The list contents are of type {@link org.xtext.example.mydsl.myDsl.rImportSyntax}.
+   * The list contents are of type {@link org.xtext.example.mydsl.myDsl.ImportSyntax}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Syntaxes</em>' containment reference list isn't clear,
@@ -69,7 +69,7 @@ public interface rRoot extends EObject
    * @model containment="true"
    * @generated
    */
-  EList<rImportSyntax> getSyntaxes();
+  EList<ImportSyntax> getSyntaxes();
 
   /**
    * Returns the value of the '<em><b>Semantics</b></em>' attribute list.

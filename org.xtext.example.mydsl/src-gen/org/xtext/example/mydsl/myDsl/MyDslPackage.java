@@ -122,14 +122,14 @@ public interface MyDslPackage extends EPackage
   int RROOT_FEATURE_COUNT = 5;
 
   /**
-   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.rImportSyntaxImpl <em>rImport Syntax</em>}' class.
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.ImportSyntaxImpl <em>Import Syntax</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.xtext.example.mydsl.myDsl.impl.rImportSyntaxImpl
-   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getrImportSyntax()
+   * @see org.xtext.example.mydsl.myDsl.impl.ImportSyntaxImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getImportSyntax()
    * @generated
    */
-  int RIMPORT_SYNTAX = 1;
+  int IMPORT_SYNTAX = 1;
 
   /**
    * The feature id for the '<em><b>Uri</b></em>' attribute.
@@ -138,7 +138,7 @@ public interface MyDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int RIMPORT_SYNTAX__URI = 0;
+  int IMPORT_SYNTAX__URI = 0;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -147,16 +147,16 @@ public interface MyDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int RIMPORT_SYNTAX__NAME = 1;
+  int IMPORT_SYNTAX__NAME = 1;
 
   /**
-   * The number of structural features of the '<em>rImport Syntax</em>' class.
+   * The number of structural features of the '<em>Import Syntax</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int RIMPORT_SYNTAX_FEATURE_COUNT = 2;
+  int IMPORT_SYNTAX_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.rClassImpl <em>rClass</em>}' class.
@@ -437,36 +437,36 @@ public interface MyDslPackage extends EPackage
   EReference getrRoot_XtendedClasses();
 
   /**
-   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.rImportSyntax <em>rImport Syntax</em>}'.
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.ImportSyntax <em>Import Syntax</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>rImport Syntax</em>'.
-   * @see org.xtext.example.mydsl.myDsl.rImportSyntax
+   * @return the meta object for class '<em>Import Syntax</em>'.
+   * @see org.xtext.example.mydsl.myDsl.ImportSyntax
    * @generated
    */
-  EClass getrImportSyntax();
+  EClass getImportSyntax();
 
   /**
-   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.rImportSyntax#getUri <em>Uri</em>}'.
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.ImportSyntax#getUri <em>Uri</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Uri</em>'.
-   * @see org.xtext.example.mydsl.myDsl.rImportSyntax#getUri()
-   * @see #getrImportSyntax()
+   * @see org.xtext.example.mydsl.myDsl.ImportSyntax#getUri()
+   * @see #getImportSyntax()
    * @generated
    */
-  EAttribute getrImportSyntax_Uri();
+  EAttribute getImportSyntax_Uri();
 
   /**
-   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.rImportSyntax#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.ImportSyntax#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.xtext.example.mydsl.myDsl.rImportSyntax#getName()
-   * @see #getrImportSyntax()
+   * @see org.xtext.example.mydsl.myDsl.ImportSyntax#getName()
+   * @see #getImportSyntax()
    * @generated
    */
-  EAttribute getrImportSyntax_Name();
+  EAttribute getImportSyntax_Name();
 
   /**
    * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.rClass <em>rClass</em>}'.
@@ -735,14 +735,14 @@ public interface MyDslPackage extends EPackage
     EReference RROOT__XTENDED_CLASSES = eINSTANCE.getrRoot_XtendedClasses();
 
     /**
-     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.rImportSyntaxImpl <em>rImport Syntax</em>}' class.
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.ImportSyntaxImpl <em>Import Syntax</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.xtext.example.mydsl.myDsl.impl.rImportSyntaxImpl
-     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getrImportSyntax()
+     * @see org.xtext.example.mydsl.myDsl.impl.ImportSyntaxImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getImportSyntax()
      * @generated
      */
-    EClass RIMPORT_SYNTAX = eINSTANCE.getrImportSyntax();
+    EClass IMPORT_SYNTAX = eINSTANCE.getImportSyntax();
 
     /**
      * The meta object literal for the '<em><b>Uri</b></em>' attribute feature.
@@ -750,7 +750,7 @@ public interface MyDslPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute RIMPORT_SYNTAX__URI = eINSTANCE.getrImportSyntax_Uri();
+    EAttribute IMPORT_SYNTAX__URI = eINSTANCE.getImportSyntax_Uri();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -758,7 +758,7 @@ public interface MyDslPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute RIMPORT_SYNTAX__NAME = eINSTANCE.getrImportSyntax_Name();
+    EAttribute IMPORT_SYNTAX__NAME = eINSTANCE.getImportSyntax_Name();
 
     /**
      * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.rClassImpl <em>rClass</em>}' class.

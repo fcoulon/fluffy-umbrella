@@ -37,12 +37,12 @@ public interface rClass extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Syntax</em>' reference.
-   * @see #setSyntax(rImportSyntax)
+   * @see #setSyntax(ImportSyntax)
    * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getrClass_Syntax()
    * @model
    * @generated
    */
-  rImportSyntax getSyntax();
+  ImportSyntax getSyntax();
 
   /**
    * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.rClass#getSyntax <em>Syntax</em>}' reference.
@@ -52,7 +52,7 @@ public interface rClass extends EObject
    * @see #getSyntax()
    * @generated
    */
-  void setSyntax(rImportSyntax value);
+  void setSyntax(ImportSyntax value);
 
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.

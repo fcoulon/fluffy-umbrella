@@ -55,7 +55,7 @@ public class MyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	}
 	
 	/**
-	 * rTag : '@'Ident
+	 * rTag : '@'ID
 	 * ;
 	 */
 	protected String getrTagToken(EObject semanticObject, RuleCall ruleCall, INode node) {
@@ -85,7 +85,7 @@ public class MyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     (':=' expression)?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     name=Ident (ambiguity) ';' (rule end)
+	 *     name=ID (ambiguity) ';' (rule end)
 	 */
 	protected void emit_rAttribute___ColonEqualsSignKeyword_2_0_ExpressionParserRuleCall_2_1__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -96,7 +96,7 @@ public class MyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     'def' | 'override'
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     (rule start) rTag* (ambiguity) type=Ident
+	 *     (rule start) rTag* (ambiguity) type=ID
 	 */
 	protected void emit_rOperation_DefKeyword_1_0_or_OverrideKeyword_1_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -107,7 +107,7 @@ public class MyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     rTag*
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     (rule start) (ambiguity) ('def' | 'override') type=Ident
+	 *     (rule start) (ambiguity) ('def' | 'override') type=ID
 	 */
 	protected void emit_rOperation_RTagParserRuleCall_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

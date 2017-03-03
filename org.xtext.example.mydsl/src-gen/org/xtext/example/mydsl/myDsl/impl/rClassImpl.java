@@ -19,10 +19,10 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.xtext.example.mydsl.myDsl.ImportSyntax;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 import org.xtext.example.mydsl.myDsl.rAttribute;
 import org.xtext.example.mydsl.myDsl.rClass;
-import org.xtext.example.mydsl.myDsl.rImportSyntax;
 import org.xtext.example.mydsl.myDsl.rOperation;
 
 /**
@@ -51,7 +51,7 @@ public class rClassImpl extends MinimalEObjectImpl.Container implements rClass
    * @generated
    * @ordered
    */
-  protected rImportSyntax syntax;
+  protected ImportSyntax syntax;
 
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -119,12 +119,12 @@ public class rClassImpl extends MinimalEObjectImpl.Container implements rClass
    * <!-- end-user-doc -->
    * @generated
    */
-  public rImportSyntax getSyntax()
+  public ImportSyntax getSyntax()
   {
     if (syntax != null && syntax.eIsProxy())
     {
       InternalEObject oldSyntax = (InternalEObject)syntax;
-      syntax = (rImportSyntax)eResolveProxy(oldSyntax);
+      syntax = (ImportSyntax)eResolveProxy(oldSyntax);
       if (syntax != oldSyntax)
       {
         if (eNotificationRequired())
@@ -139,7 +139,7 @@ public class rClassImpl extends MinimalEObjectImpl.Container implements rClass
    * <!-- end-user-doc -->
    * @generated
    */
-  public rImportSyntax basicGetSyntax()
+  public ImportSyntax basicGetSyntax()
   {
     return syntax;
   }
@@ -149,9 +149,9 @@ public class rClassImpl extends MinimalEObjectImpl.Container implements rClass
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setSyntax(rImportSyntax newSyntax)
+  public void setSyntax(ImportSyntax newSyntax)
   {
-    rImportSyntax oldSyntax = syntax;
+    ImportSyntax oldSyntax = syntax;
     syntax = newSyntax;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.RCLASS__SYNTAX, oldSyntax, syntax));
@@ -261,7 +261,7 @@ public class rClassImpl extends MinimalEObjectImpl.Container implements rClass
     switch (featureID)
     {
       case MyDslPackage.RCLASS__SYNTAX:
-        setSyntax((rImportSyntax)newValue);
+        setSyntax((ImportSyntax)newValue);
         return;
       case MyDslPackage.RCLASS__NAME:
         setName((String)newValue);
@@ -289,7 +289,7 @@ public class rClassImpl extends MinimalEObjectImpl.Container implements rClass
     switch (featureID)
     {
       case MyDslPackage.RCLASS__SYNTAX:
-        setSyntax((rImportSyntax)null);
+        setSyntax((ImportSyntax)null);
         return;
       case MyDslPackage.RCLASS__NAME:
         setName(NAME_EDEFAULT);

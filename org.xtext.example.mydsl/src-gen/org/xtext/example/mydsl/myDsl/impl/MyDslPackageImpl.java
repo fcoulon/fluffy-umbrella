@@ -10,11 +10,11 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.xtext.example.mydsl.myDsl.ImportSyntax;
 import org.xtext.example.mydsl.myDsl.MyDslFactory;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 import org.xtext.example.mydsl.myDsl.rAttribute;
 import org.xtext.example.mydsl.myDsl.rClass;
-import org.xtext.example.mydsl.myDsl.rImportSyntax;
 import org.xtext.example.mydsl.myDsl.rOperation;
 import org.xtext.example.mydsl.myDsl.rParameters;
 import org.xtext.example.mydsl.myDsl.rRoot;
@@ -40,7 +40,7 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass rImportSyntaxEClass = null;
+  private EClass importSyntaxEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -205,9 +205,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getrImportSyntax()
+  public EClass getImportSyntax()
   {
-    return rImportSyntaxEClass;
+    return importSyntaxEClass;
   }
 
   /**
@@ -215,9 +215,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getrImportSyntax_Uri()
+  public EAttribute getImportSyntax_Uri()
   {
-    return (EAttribute)rImportSyntaxEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)importSyntaxEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -225,9 +225,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getrImportSyntax_Name()
+  public EAttribute getImportSyntax_Name()
   {
-    return (EAttribute)rImportSyntaxEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)importSyntaxEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -447,9 +447,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     createEAttribute(rRootEClass, RROOT__SERVICES);
     createEReference(rRootEClass, RROOT__XTENDED_CLASSES);
 
-    rImportSyntaxEClass = createEClass(RIMPORT_SYNTAX);
-    createEAttribute(rImportSyntaxEClass, RIMPORT_SYNTAX__URI);
-    createEAttribute(rImportSyntaxEClass, RIMPORT_SYNTAX__NAME);
+    importSyntaxEClass = createEClass(IMPORT_SYNTAX);
+    createEAttribute(importSyntaxEClass, IMPORT_SYNTAX__URI);
+    createEAttribute(importSyntaxEClass, IMPORT_SYNTAX__NAME);
 
     rClassEClass = createEClass(RCLASS);
     createEReference(rClassEClass, RCLASS__SYNTAX);
@@ -508,17 +508,17 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     // Initialize classes and features; add operations and parameters
     initEClass(rRootEClass, rRoot.class, "rRoot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getrRoot_Behaviour(), ecorePackage.getEString(), "behaviour", null, 0, 1, rRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getrRoot_Syntaxes(), this.getrImportSyntax(), null, "syntaxes", null, 0, -1, rRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getrRoot_Syntaxes(), this.getImportSyntax(), null, "syntaxes", null, 0, -1, rRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getrRoot_Semantics(), ecorePackage.getEString(), "semantics", null, 0, -1, rRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getrRoot_Services(), ecorePackage.getEString(), "services", null, 0, -1, rRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getrRoot_XtendedClasses(), this.getrClass(), null, "xtendedClasses", null, 0, -1, rRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(rImportSyntaxEClass, rImportSyntax.class, "rImportSyntax", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getrImportSyntax_Uri(), ecorePackage.getEString(), "uri", null, 0, 1, rImportSyntax.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getrImportSyntax_Name(), ecorePackage.getEString(), "name", null, 0, 1, rImportSyntax.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(importSyntaxEClass, ImportSyntax.class, "ImportSyntax", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getImportSyntax_Uri(), ecorePackage.getEString(), "uri", null, 0, 1, ImportSyntax.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getImportSyntax_Name(), ecorePackage.getEString(), "name", null, 0, 1, ImportSyntax.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(rClassEClass, rClass.class, "rClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getrClass_Syntax(), this.getrImportSyntax(), null, "syntax", null, 0, 1, rClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getrClass_Syntax(), this.getImportSyntax(), null, "syntax", null, 0, 1, rClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getrClass_Name(), ecorePackage.getEString(), "name", null, 0, 1, rClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getrClass_Attributes(), this.getrAttribute(), null, "attributes", null, 0, -1, rClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getrClass_Operations(), this.getrOperation(), null, "operations", null, 0, -1, rClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
