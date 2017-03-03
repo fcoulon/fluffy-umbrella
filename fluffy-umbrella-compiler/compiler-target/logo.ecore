@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="logo" nsURI="http://logo" nsPrefix="logo">
+  <eSubpackages name="logokmLogo" nsURI="http://logo/kmLogo" nsPrefix="logokmlogo">
+    <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="int"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+    <eSubpackages name="logoASM" nsURI="http://logo/ASM" nsPrefix="logokmlogo">
+      <eClassifiers xsi:type="ecore:EClass" name="Instruction" abstract="true"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Primitive" abstract="true" eSuperTypes="//logokmLogo/logoASM/Instruction"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Back" eSuperTypes="//logokmLogo/logoASM/Primitive">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="steps" lowerBound="1" eType="//logokmLogo/logoASM/Expression" containment="true" resolveProxies="false"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Forward" eSuperTypes="//logokmLogo/logoASM/Primitive">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="steps" lowerBound="1" eType="//logokmLogo/logoASM/Expression" containment="true" resolveProxies="false"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Left" eSuperTypes="//logokmLogo/logoASM/Primitive">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="angle" eType="//logokmLogo/logoASM/Expression" containment="true" resolveProxies="false"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Right" eSuperTypes="//logokmLogo/logoASM/Primitive">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="angle" eType="//logokmLogo/logoASM/Expression" containment="true" resolveProxies="false"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="PenDown" eSuperTypes="//logokmLogo/logoASM/Primitive"/>
+      <eClassifiers xsi:type="ecore:EClass" name="PenUp" eSuperTypes="//logokmLogo/logoASM/Primitive"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Clear" eSuperTypes="//logokmLogo/logoASM/Primitive"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true" eSuperTypes="//logokmLogo/logoASM/Instruction"/>
+      <eClassifiers xsi:type="ecore:EClass" name="BinaryExp" abstract="true" eSuperTypes="//logokmLogo/logoASM/Expression">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="lhs" lowerBound="1" eType="//logokmLogo/logoASM/Expression" containment="true" resolveProxies="false"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="rhs" lowerBound="1" eType="//logokmLogo/logoASM/Expression" containment="true" resolveProxies="false"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="UnaryExpression" abstract="true" eSuperTypes="//logokmLogo/logoASM/Expression">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1" eType="//logokmLogo/logoASM/Expression" containment="true" resolveProxies="false"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Constant" eSuperTypes="//logokmLogo/logoASM/Expression">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="value">
+          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ProcCall" eSuperTypes="//logokmLogo/logoASM/Expression">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="actualArgs" upperBound="-1" eType="//logokmLogo/logoASM/Expression" containment="true" resolveProxies="false"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="declaration" lowerBound="1" eType="//logokmLogo/logoASM/ProcDeclaration" eOpposite="//logokmLogo/logoASM/ProcDeclaration/procCall"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ProcDeclaration" eSuperTypes="//logokmLogo/logoASM/Instruction">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//logokmLogo/String"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="args" upperBound="-1" eType="//logokmLogo/logoASM/Parameter" containment="true" resolveProxies="false"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="procCall" upperBound="-1" eType="//logokmLogo/logoASM/ProcCall" eOpposite="//logokmLogo/logoASM/ProcCall/declaration"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="instructions" upperBound="-1" eType="//logokmLogo/logoASM/Instruction" containment="true" resolveProxies="false"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Block" eSuperTypes="//logokmLogo/logoASM/Instruction">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="instructions" upperBound="-1" eType="//logokmLogo/logoASM/Instruction" containment="true" resolveProxies="false"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="If" eSuperTypes="//logokmLogo/logoASM/ControlStructure">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="thenPart" lowerBound="1" eType="//logokmLogo/logoASM/Block" containment="true" resolveProxies="false"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="elsePart" eType="//logokmLogo/logoASM/Block" containment="true" resolveProxies="false"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ControlStructure" eSuperTypes="//logokmLogo/logoASM/Instruction">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="//logokmLogo/logoASM/Expression" containment="true" resolveProxies="false"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Repeat" eSuperTypes="//logokmLogo/logoASM/ControlStructure">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="block" lowerBound="1" eType="//logokmLogo/logoASM/Block" containment="true" resolveProxies="false"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="While" eSuperTypes="//logokmLogo/logoASM/ControlStructure">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="block" lowerBound="1" eType="//logokmLogo/logoASM/Block" containment="true" resolveProxies="false"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Parameter">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//logokmLogo/String"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ParameterCall" eSuperTypes="//logokmLogo/logoASM/Expression">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" lowerBound="1" eType="//logokmLogo/logoASM/Parameter"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Plus" eSuperTypes="//logokmLogo/logoASM/BinaryExp"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Minus" eSuperTypes="//logokmLogo/logoASM/BinaryExp"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Mult" eSuperTypes="//logokmLogo/logoASM/BinaryExp"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Div" eSuperTypes="//logokmLogo/logoASM/BinaryExp"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Equals" eSuperTypes="//logokmLogo/logoASM/BinaryExp"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Greater" eSuperTypes="//logokmLogo/logoASM/BinaryExp"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Lower" eSuperTypes="//logokmLogo/logoASM/BinaryExp"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Cos" eSuperTypes="//logokmLogo/logoASM/UnaryExpression"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Sin" eSuperTypes="//logokmLogo/logoASM/UnaryExpression"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Tan" eSuperTypes="//logokmLogo/logoASM/UnaryExpression"/>
+      <eClassifiers xsi:type="ecore:EClass" name="LogoProgram">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="instructions" upperBound="-1" eType="//logokmLogo/logoASM/Instruction" containment="true" resolveProxies="false"/>
+      </eClassifiers>
+    </eSubpackages>
+  </eSubpackages>
+  <eSubpackages name="logovmlogo" nsURI="http://logo/vmlogo" nsPrefix="logovmlogo">
+    <eClassifiers xsi:type="ecore:EClass" name="Turtle">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="position" lowerBound="1" eType="//logovmlogo/Point" containment="true" resolveProxies="false"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="heading">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="penUp">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="drawings" upperBound="-1" eType="//logovmlogo/Segment" containment="true" resolveProxies="false"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="callStack" lowerBound="1" eType="//logovmlogo/CallStack" containment="true" resolveProxies="false"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Point">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="x">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="y">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Segment">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="begin" lowerBound="1" eType="//logovmlogo/Point" containment="true" resolveProxies="false"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="end" lowerBound="1" eType="//logovmlogo/Point" containment="true" resolveProxies="false"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CallStack">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="frames" upperBound="-1" eType="//logovmlogo/StackFrame" containment="true" resolveProxies="false"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="StackFrame">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="variables" upperBound="-1" eType="//logovmlogo/Variable" containment="true" resolveProxies="false"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Variable">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+      </eStructuralFeatures>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>

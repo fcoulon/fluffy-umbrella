@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="ASCII"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/abcd/src" modelPluginID="ModelPluginIDTest" modelName="MODELNAMETEST" complianceLevel="8.0" copyrightFields="false">
+  <foreignModel>http://logo</foreignModel>
+  <genPackages prefix="Logo" disposableProviderFactory="true">
+    <ecorePackage href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#/"/>
+    <nestedGenPackages prefix="Logo.kmLogo" disposableProviderFactory="true">
+      <ecorePackage href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo"/>
+      <genDataTypes>
+        <ecoreDataType href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/Integer"/>
+      </genDataTypes>
+      <genDataTypes>
+        <ecoreDataType href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/Boolean"/>
+      </genDataTypes>
+      <genDataTypes>
+        <ecoreDataType href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/String"/>
+      </genDataTypes>
+      <nestedGenPackages prefix="ASM" disposableProviderFactory="true">
+        <ecorePackage href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM"/>
+        <genClasses image="false">
+          <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/Instruction"/>
+        </genClasses>
+        <genClasses image="false">
+          <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/Primitive"/>
+        </genClasses>
+        <genClasses>
+          <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/Back"/>
+          <genFeatures property="None" children="true" createChild="true">
+            <ecoreFeature xsi:type="ecore:EReference" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/Back/steps"/>
+          </genFeatures>
+        </genClasses>
+        <genClasses>
+          <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/Forward"/>
+          <genFeatures property="None" children="true" createChild="true">
+            <ecoreFeature xsi:type="ecore:EReference" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/Forward/steps"/>
+          </genFeatures>
+        </genClasses>
+        <genClasses>
+          <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/Left"/>
+          <genFeatures property="None" children="true" createChild="true">
+            <ecoreFeature xsi:type="ecore:EReference" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/Left/angle"/>
+          </genFeatures>
+        </genClasses>
+        <genClasses>
+          <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/Right"/>
+          <genFeatures property="None" children="true" createChild="true">
+            <ecoreFeature xsi:type="ecore:EReference" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/Right/angle"/>
+          </genFeatures>
+        </genClasses>
+        <genClasses>
+          <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/PenDown"/>
+        </genClasses>
+        <genClasses>
+          <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/PenUp"/>
+        </genClasses>
+        <genClasses>
+          <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/Clear"/>
+        </genClasses>
+        <genClasses image="false">
+          <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/Expression"/>
+        </genClasses>
+        <genClasses image="false">
+          <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/BinaryExp"/>
+          <genFeatures property="None" children="true" createChild="true">
+            <ecoreFeature xsi:type="ecore:EReference" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/BinaryExp/lhs"/>
+          </genFeatures>
+          <genFeatures property="None" children="true" createChild="true">
+            <ecoreFeature xsi:type="ecore:EReference" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/BinaryExp/rhs"/>
+          </genFeatures>
+        </genClasses>
+        <genClasses image="false">
+          <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/UnaryExpression"/>
+          <genFeatures property="None" children="true" createChild="true">
+            <ecoreFeature xsi:type="ecore:EReference" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/UnaryExpression/expression"/>
+          </genFeatures>
+        </genClasses>
+        <genClasses>
+          <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/Constant"/>
+          <genFeatures createChild="false">
+            <ecoreFeature xsi:type="ecore:EAttribute" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/Constant/value"/>
+          </genFeatures>
+        </genClasses>
+        <genClasses>
+          <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/ProcCall"/>
+          <genFeatures property="None" children="true" createChild="true">
+            <ecoreFeature xsi:type="ecore:EReference" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/ProcCall/actualArgs"/>
+          </genFeatures>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true">
+            <ecoreFeature xsi:type="ecore:EReference" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/ProcCall/declaration"/>
+          </genFeatures>
+        </genClasses>
+        <genClasses>
+          <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/ProcDeclaration"/>
+          <genFeatures createChild="false">
+            <ecoreFeature xsi:type="ecore:EAttribute" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/ProcDeclaration/name"/>
+          </genFeatures>
+          <genFeatures property="None" children="true" createChild="true">
+            <ecoreFeature xsi:type="ecore:EReference" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/ProcDeclaration/args"/>
+          </genFeatures>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true">
+            <ecoreFeature xsi:type="ecore:EReference" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/ProcDeclaration/procCall"/>
+          </genFeatures>
+          <genFeatures property="None" children="true" createChild="true">
+            <ecoreFeature xsi:type="ecore:EReference" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/ProcDeclaration/instructions"/>
+          </genFeatures>
+        </genClasses>
+        <genClasses>
+          <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/Block"/>
+          <genFeatures property="None" children="true" createChild="true">
+            <ecoreFeature xsi:type="ecore:EReference" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/Block/instructions"/>
+          </genFeatures>
+        </genClasses>
+        <genClasses>
+          <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/If"/>
+          <genFeatures property="None" children="true" createChild="true">
+            <ecoreFeature xsi:type="ecore:EReference" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/If/thenPart"/>
+          </genFeatures>
+          <genFeatures property="None" children="true" createChild="true">
+            <ecoreFeature xsi:type="ecore:EReference" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/If/elsePart"/>
+          </genFeatures>
+        </genClasses>
+        <genClasses>
+          <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/ControlStructure"/>
+          <genFeatures property="None" children="true" createChild="true">
+            <ecoreFeature xsi:type="ecore:EReference" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/ControlStructure/condition"/>
+          </genFeatures>
+        </genClasses>
+        <genClasses>
+          <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/Repeat"/>
+          <genFeatures property="None" children="true" createChild="true">
+            <ecoreFeature xsi:type="ecore:EReference" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/Repeat/block"/>
+          </genFeatures>
+        </genClasses>
+        <genClasses>
+          <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/While"/>
+          <genFeatures property="None" children="true" createChild="true">
+            <ecoreFeature xsi:type="ecore:EReference" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/While/block"/>
+          </genFeatures>
+        </genClasses>
+        <genClasses>
+          <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/Parameter"/>
+          <genFeatures createChild="false">
+            <ecoreFeature xsi:type="ecore:EAttribute" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/Parameter/name"/>
+          </genFeatures>
+        </genClasses>
+        <genClasses>
+          <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/ParameterCall"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true">
+            <ecoreFeature xsi:type="ecore:EReference" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/ParameterCall/parameter"/>
+          </genFeatures>
+        </genClasses>
+        <genClasses>
+          <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/Plus"/>
+        </genClasses>
+        <genClasses>
+          <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/Minus"/>
+        </genClasses>
+        <genClasses>
+          <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/Mult"/>
+        </genClasses>
+        <genClasses>
+          <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/Div"/>
+        </genClasses>
+        <genClasses>
+          <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/Equals"/>
+        </genClasses>
+        <genClasses>
+          <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/Greater"/>
+        </genClasses>
+        <genClasses>
+          <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/Lower"/>
+        </genClasses>
+        <genClasses>
+          <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/Cos"/>
+        </genClasses>
+        <genClasses>
+          <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/Sin"/>
+        </genClasses>
+        <genClasses>
+          <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/Tan"/>
+        </genClasses>
+        <genClasses>
+          <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/LogoProgram"/>
+          <genFeatures property="None" children="true" createChild="true">
+            <ecoreFeature xsi:type="ecore:EReference" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.kmLogo/ASM/LogoProgram/instructions"/>
+          </genFeatures>
+        </genClasses>
+      </nestedGenPackages>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Logo.vmlogo" disposableProviderFactory="true">
+      <ecorePackage href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.vmlogo"/>
+      <genClasses>
+        <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.vmlogo/Turtle"/>
+        <genFeatures property="None" children="true" createChild="true">
+          <ecoreFeature xsi:type="ecore:EReference" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.vmlogo/Turtle/position"/>
+        </genFeatures>
+        <genFeatures createChild="false">
+          <ecoreFeature xsi:type="ecore:EAttribute" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.vmlogo/Turtle/heading"/>
+        </genFeatures>
+        <genFeatures createChild="false">
+          <ecoreFeature xsi:type="ecore:EAttribute" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.vmlogo/Turtle/penUp"/>
+        </genFeatures>
+        <genFeatures property="None" children="true" createChild="true">
+          <ecoreFeature xsi:type="ecore:EReference" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.vmlogo/Turtle/drawings"/>
+        </genFeatures>
+        <genFeatures property="None" children="true" createChild="true">
+          <ecoreFeature xsi:type="ecore:EReference" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.vmlogo/Turtle/callStack"/>
+        </genFeatures>
+      </genClasses>
+      <genClasses>
+        <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.vmlogo/Point"/>
+        <genFeatures createChild="false">
+          <ecoreFeature xsi:type="ecore:EAttribute" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.vmlogo/Point/x"/>
+        </genFeatures>
+        <genFeatures createChild="false">
+          <ecoreFeature xsi:type="ecore:EAttribute" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.vmlogo/Point/y"/>
+        </genFeatures>
+      </genClasses>
+      <genClasses>
+        <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.vmlogo/Segment"/>
+        <genFeatures property="None" children="true" createChild="true">
+          <ecoreFeature xsi:type="ecore:EReference" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.vmlogo/Segment/begin"/>
+        </genFeatures>
+        <genFeatures property="None" children="true" createChild="true">
+          <ecoreFeature xsi:type="ecore:EReference" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.vmlogo/Segment/end"/>
+        </genFeatures>
+      </genClasses>
+      <genClasses>
+        <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.vmlogo/CallStack"/>
+        <genFeatures property="None" children="true" createChild="true">
+          <ecoreFeature xsi:type="ecore:EReference" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.vmlogo/CallStack/frames"/>
+        </genFeatures>
+      </genClasses>
+      <genClasses>
+        <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.vmlogo/StackFrame"/>
+        <genFeatures property="None" children="true" createChild="true">
+          <ecoreFeature xsi:type="ecore:EReference" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.vmlogo/StackFrame/variables"/>
+        </genFeatures>
+      </genClasses>
+      <genClasses>
+        <ecoreClass href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.vmlogo/Variable"/>
+        <genFeatures createChild="false">
+          <ecoreFeature xsi:type="ecore:EAttribute" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.vmlogo/Variable/name"/>
+        </genFeatures>
+        <genFeatures createChild="false">
+          <ecoreFeature xsi:type="ecore:EAttribute" href="/home/mleduc/dev/java/structural-type-checker-workspace/fr.mleduc.mt.compiler/compiler-target/logo.ecore#//logo.vmlogo/Variable/value"/>
+        </genFeatures>
+      </genClasses>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>
