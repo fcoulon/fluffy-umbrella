@@ -69,7 +69,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     rAttribute returns rAttribute
 	 *
 	 * Constraint:
-	 *     (type=ID name=ID)
+	 *     (type=Qualified name=ID)
 	 */
 	protected void sequence_rAttribute(ISerializationContext context, rAttribute semanticObject) {
 		if (errorAcceptor != null) {
@@ -79,7 +79,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.RATTRIBUTE__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getRAttributeAccess().getTypeIDTerminalRuleCall_0_0(), semanticObject.getType());
+		feeder.accept(grammarAccess.getRAttributeAccess().getTypeQualifiedParserRuleCall_0_0(), semanticObject.getType());
 		feeder.accept(grammarAccess.getRAttributeAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
 		feeder.finish();
 	}

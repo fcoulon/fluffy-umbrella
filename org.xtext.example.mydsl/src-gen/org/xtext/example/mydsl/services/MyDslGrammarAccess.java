@@ -458,7 +458,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.MyDsl.rAttribute");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cTypeIDTerminalRuleCall_0_0 = (RuleCall)cTypeAssignment_0.eContents().get(0);
+		private final RuleCall cTypeQualifiedParserRuleCall_0_0 = (RuleCall)cTypeAssignment_0.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
@@ -467,17 +467,17 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//rAttribute:
-		//	type=ID name=ID (':=' expression)? ';';
+		//	type=Qualified name=ID (':=' expression)? ';';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//type=ID name=ID (':=' expression)? ';'
+		//type=Qualified name=ID (':=' expression)? ';'
 		public Group getGroup() { return cGroup; }
 		
-		//type=ID
+		//type=Qualified
 		public Assignment getTypeAssignment_0() { return cTypeAssignment_0; }
 		
-		//ID
-		public RuleCall getTypeIDTerminalRuleCall_0_0() { return cTypeIDTerminalRuleCall_0_0; }
+		//Qualified
+		public RuleCall getTypeQualifiedParserRuleCall_0_0() { return cTypeQualifiedParserRuleCall_0_0; }
 		
 		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
@@ -1879,7 +1879,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//rAttribute:
-	//	type=ID name=ID (':=' expression)? ';';
+	//	type=Qualified name=ID (':=' expression)? ';';
 	public RAttributeElements getRAttributeAccess() {
 		return pRAttribute;
 	}

@@ -7298,9 +7298,9 @@ rule__RAttribute__TypeAssignment_0
 	}
 :
 	(
-		{ before(grammarAccess.getRAttributeAccess().getTypeIDTerminalRuleCall_0_0()); }
-		RULE_ID
-		{ after(grammarAccess.getRAttributeAccess().getTypeIDTerminalRuleCall_0_0()); }
+		{ before(grammarAccess.getRAttributeAccess().getTypeQualifiedParserRuleCall_0_0()); }
+		ruleQualified
+		{ after(grammarAccess.getRAttributeAccess().getTypeQualifiedParserRuleCall_0_0()); }
 	)
 ;
 finally {

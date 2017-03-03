@@ -832,19 +832,20 @@ rulerAttribute returns [EObject current=null]
 	(
 		(
 			(
-				lv_type_0_0=RULE_ID
 				{
-					newLeafNode(lv_type_0_0, grammarAccess.getRAttributeAccess().getTypeIDTerminalRuleCall_0_0());
+					newCompositeNode(grammarAccess.getRAttributeAccess().getTypeQualifiedParserRuleCall_0_0());
 				}
+				lv_type_0_0=ruleQualified
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getRAttributeRule());
+						$current = createModelElementForParent(grammarAccess.getRAttributeRule());
 					}
-					setWithLastConsumed(
+					set(
 						$current,
 						"type",
 						lv_type_0_0,
-						"org.eclipse.xtext.common.Terminals.ID");
+						"org.xtext.example.mydsl.MyDsl.Qualified");
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)

@@ -23200,24 +23200,28 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RAttribute__TypeAssignment_0"
-    // InternalMyDsl.g:7295:1: rule__RAttribute__TypeAssignment_0 : ( RULE_ID ) ;
+    // InternalMyDsl.g:7295:1: rule__RAttribute__TypeAssignment_0 : ( ruleQualified ) ;
     public final void rule__RAttribute__TypeAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMyDsl.g:7299:1: ( ( RULE_ID ) )
-            // InternalMyDsl.g:7300:2: ( RULE_ID )
+            // InternalMyDsl.g:7299:1: ( ( ruleQualified ) )
+            // InternalMyDsl.g:7300:2: ( ruleQualified )
             {
-            // InternalMyDsl.g:7300:2: ( RULE_ID )
-            // InternalMyDsl.g:7301:3: RULE_ID
+            // InternalMyDsl.g:7300:2: ( ruleQualified )
+            // InternalMyDsl.g:7301:3: ruleQualified
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getRAttributeAccess().getTypeIDTerminalRuleCall_0_0()); 
+               before(grammarAccess.getRAttributeAccess().getTypeQualifiedParserRuleCall_0_0()); 
             }
-            match(input,RULE_ID,FOLLOW_2); if (state.failed) return ;
+            pushFollow(FOLLOW_2);
+            ruleQualified();
+
+            state._fsp--;
+            if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getRAttributeAccess().getTypeIDTerminalRuleCall_0_0()); 
+               after(grammarAccess.getRAttributeAccess().getTypeQualifiedParserRuleCall_0_0()); 
             }
 
             }
