@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="fluffy-umbrella-compiler.ui.contribution1"
+            objectClass="org.eclipse.core.resources.IFile">
+         <menu
+               id="fluffy-umbrella-compiler.ui.menu1"
+               label="XAQL"
+               path="additions">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               class="fluffyumbrellacompiler.ui.popup.actions.XAQLCompile"
+               enablesFor="1"
+               id="fluffy-umbrella-compiler.ui.newAction"
+               label="Compile"
+               menubarPath="fluffy-umbrella-compiler.ui.menu1/group1">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>

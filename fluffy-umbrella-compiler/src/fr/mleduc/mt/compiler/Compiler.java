@@ -2,6 +2,7 @@ package fr.mleduc.mt.compiler;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -19,6 +20,13 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
+import implementation.ImportSyntax;
+import implementation.ModelBehavior;
+import implementation.util.ImplementationSwitch;
+import lang.LangInterpreter;
+import lang.core.parser.AstBuilder;
+import lang.core.parser.visitor.ParseResult;
+
 /**
  * 
  * This compiler compiles a given semantic, which conform itself to a bunch of
@@ -29,8 +37,15 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
  */
 public class Compiler {
 
+	private final String sourceCode;
+	private ModelBehavior root;
+
+	public Compiler(final String sourceCode) {
+		this.sourceCode = sourceCode;
+	}
+
 	public GenModel saveGenModel(final ResourceSetImpl resSet, final String languageName, final EPackage rootPackage,
-			String projectName) {
+			final String projectName) {
 		/*
 		 * Final step: Generating the emf code from the ecore generated
 		 */
@@ -65,7 +80,7 @@ public class Compiler {
 	}
 
 	public EPackage initializeLanguageEcore(final Map<String, EPackage> syntaxes, final String languageName,
-			ResourceSetImpl resSet, String projectName) {
+			final ResourceSetImpl resSet, final String projectName) {
 		/*
 		 * First step: copying the target syntaxes to a working directory
 		 * 
@@ -84,7 +99,7 @@ public class Compiler {
 		for (final Entry<String, EPackage> ePackage : syntaxes.entrySet()) {
 
 			final EPackage copy = EcoreUtil.copy(ePackage.getValue());
-			for (EPackage eSubPackage : copy.getESubpackages()) {
+			for (final EPackage eSubPackage : copy.getESubpackages()) {
 				final String initialName = eSubPackage.getName();
 				eSubPackage.setName(languageName + ePackage.getKey() + initialName);
 				eSubPackage.setNsPrefix(languageName + copy.getNsPrefix());
@@ -107,17 +122,45 @@ public class Compiler {
 		return rootPackage;
 	}
 
-	public void proceedToGeneration(GenModel genModel) {
+	public void proceedToGeneration(final GenModel genModel) {
 		genModel.reconcile();
 		genModel.setCanGenerate(true);
 		genModel.setValidateModel(true);
 		genModel.setUpdateClasspath(true);
 
-		org.eclipse.emf.codegen.ecore.generator.GeneratorAdapterFactory.Descriptor.Registry reg = GeneratorAdapterFactory.Descriptor.Registry.INSTANCE;
-		Generator generator = new Generator(reg);
+		final org.eclipse.emf.codegen.ecore.generator.GeneratorAdapterFactory.Descriptor.Registry reg = GeneratorAdapterFactory.Descriptor.Registry.INSTANCE;
+		final Generator generator = new Generator(reg);
 		generator.setInput(genModel);
 
 		generator.generate(genModel, GenBaseGeneratorAdapter.MODEL_PROJECT_TYPE, new NullMonitorImplementation(this));
 
 	}
+
+	public Map<String, EPackage> getListSyntaxes() {
+		final ModelBehavior root = getRoot();
+		final Map<String, EPackage> syntaxes = new HashMap<>();
+		new ImplementationSwitch<Void>() {
+
+			@Override
+			public Void caseImportSyntax(final ImportSyntax object) {
+
+				syntaxes.put(object.getName(), EPackage.Registry.INSTANCE.getEPackage(object.getUri()));
+				return null;
+			}
+
+		}.doSwitch(root);
+
+		return syntaxes;
+	}
+
+	public ModelBehavior getRoot() {
+		if (this.root == null) {
+			final LangInterpreter interpreter = new LangInterpreter();
+			final ParseResult<ModelBehavior> parse = new AstBuilder(interpreter.getQueryEnvironment())
+					.parse(sourceCode);
+			this.root = parse.getRoot();
+		} 
+		return this.root;
+	}
+
 }
