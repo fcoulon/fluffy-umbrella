@@ -3,23 +3,73 @@
  */
 package org.xtext.example.mydsl.validation
 
+import org.eclipse.emf.ecore.EClass
+import org.eclipse.emf.ecore.EPackage
+import org.eclipse.xtext.validation.Check
+import org.xtext.example.mydsl.myDsl.rRoot
+import org.xtext.example.mydsl.myDsl.rImportSyntax
+import org.xtext.example.mydsl.myDsl.rClass
+import org.xtext.example.mydsl.myDsl.MyDslPackage
 
 /**
  * This class contains custom validation rules. 
- *
+ * 
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
 class MyDslValidator extends AbstractMyDslValidator {
-	
-//	public static val INVALID_NAME = 'invalidName'
-//
-//	@Check
-//	def checkGreetingStartsWithCapital(Greeting greeting) {
-//		if (!Character.isUpperCase(greeting.name.charAt(0))) {
-//			warning('Name should start with a capital', 
-//					MyDslPackage.Literals.GREETING__NAME,
-//					INVALID_NAME)
-//		}
-//	}
-	
+
+	public static val INVALID_URI = 'invalid uri'
+	public static val INVALID_CLASS_NAME = 'invalid class name'
+	public static val INVALID_PACKAGE = 'invalid package'
+	public static val DUPLICATE_SEMANTIC_NAME = 'duplicated semantic name'
+	public static val DUPLICATE_CLASS_NAME = 'duplicated class name'
+
+	@Check
+	def checkLanguageSyntaxesNamesUniques(rRoot language) {
+		for (syntax : language.syntaxes) {
+			if (language.syntaxes.filter[s|s.name == syntax.name].length > 1) {
+				error('''Semantic name have to be unique''', syntax, MyDslPackage.Literals.RIMPORT_SYNTAX__NAME,
+					DUPLICATE_SEMANTIC_NAME)
+			}
+		}
+	}
+
+	@Check
+	def checkLanguageClassNameA(rRoot language) {
+		for (clazz : language.xtendedClasses) {
+			if (language.xtendedClasses.filter[c|c.syntax == clazz.syntax && c.name == clazz.name].length > 1) {
+				error('''Class name have to be unique''', clazz, MyDslPackage.Literals.RCLASS__NAME,
+					DUPLICATE_CLASS_NAME)
+			}
+		}
+	}
+
+	@Check
+	def checkSyntax(rImportSyntax syntax) {
+
+		val epackage = EPackage.Registry.INSTANCE.getEPackage(syntax.uri)
+		if (epackage == null) {
+			error('''No package «syntax.uri» found.''', MyDslPackage.Literals.RIMPORT_SYNTAX__URI, INVALID_URI)
+		}
+	}
+
+	@Check
+	def checkClass(rClass clazz) {
+
+		val semanticPackage = EPackage.Registry.INSTANCE.getEPackage(clazz.syntax.uri)
+
+		if (semanticPackage == null) {
+			error('''No package «clazz.syntax.name» found.''', MyDslPackage.Literals.RCLASS__SYNTAX, INVALID_PACKAGE)
+		} else {
+			val clazzExist = semanticPackage.eAllContents.filter[e|e instanceof EClass].exists [ e |
+				(e as EClass).name == clazz.name
+			]
+
+			if (!clazzExist) {
+				error('''No class «clazz.name» in package «semanticPackage.name»''',
+					MyDslPackage.Literals.RCLASS__NAME, INVALID_CLASS_NAME)
+			}
+		}
+	}
+
 }
