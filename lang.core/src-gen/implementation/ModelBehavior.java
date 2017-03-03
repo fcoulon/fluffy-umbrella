@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link implementation.ModelBehavior#getClassExtensions <em>Class Extensions</em>}</li>
  *   <li>{@link implementation.ModelBehavior#getServices <em>Services</em>}</li>
+ *   <li>{@link implementation.ModelBehavior#getImportSyntaxes <em>Import Syntaxes</em>}</li>
  * </ul>
  *
  * @see implementation.ImplementationPackage#getModelBehavior()
@@ -55,5 +56,21 @@ public interface ModelBehavior extends EObject {
 	 * @generated
 	 */
 	EList<String> getServices();
+
+	/**
+	 * Returns the value of the '<em><b>Import Syntaxes</b></em>' containment reference list.
+	 * The list contents are of type {@link implementation.ImportSyntax}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Import Syntaxes</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Import Syntaxes</em>' containment reference list.
+	 * @see implementation.ImplementationPackage#getModelBehavior_ImportSyntaxes()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<ImportSyntax> getImportSyntaxes();
 
 } // ModelBehavior

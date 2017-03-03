@@ -74,6 +74,7 @@ public class ImplementationFactoryImpl extends EFactoryImpl implements Implement
 			case ImplementationPackage.WHILE: return createWhile();
 			case ImplementationPackage.IF: return createIf();
 			case ImplementationPackage.EXPRESSION_STATEMENT: return createExpressionStatement();
+			case ImplementationPackage.IMPORT_SYNTAX: return createImportSyntax();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -257,6 +258,16 @@ public class ImplementationFactoryImpl extends EFactoryImpl implements Implement
 	public ExpressionStatement createExpressionStatement() {
 		ExpressionStatementImpl expressionStatement = new ExpressionStatementImpl();
 		return expressionStatement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ImportSyntax createImportSyntax() {
+		ImportSyntaxImpl importSyntax = new ImportSyntaxImpl();
+		return importSyntax;
 	}
 
 	/**

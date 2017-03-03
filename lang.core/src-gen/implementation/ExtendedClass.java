@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link implementation.ExtendedClass#getMethods <em>Methods</em>}</li>
  *   <li>{@link implementation.ExtendedClass#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link implementation.ExtendedClass#getExtends <em>Extends</em>}</li>
+ *   <li>{@link implementation.ExtendedClass#getSyntax <em>Syntax</em>}</li>
  * </ul>
  *
  * @see implementation.ImplementationPackage#getExtendedClass()
@@ -100,5 +101,31 @@ public interface ExtendedClass extends EObject {
 	 * @generated
 	 */
 	EList<ExtendedClass> getExtends();
+
+	/**
+	 * Returns the value of the '<em><b>Syntax</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Syntax</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Syntax</em>' reference.
+	 * @see #setSyntax(ImportSyntax)
+	 * @see implementation.ImplementationPackage#getExtendedClass_Syntax()
+	 * @model required="true"
+	 * @generated
+	 */
+	ImportSyntax getSyntax();
+
+	/**
+	 * Sets the value of the '{@link implementation.ExtendedClass#getSyntax <em>Syntax</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Syntax</em>' reference.
+	 * @see #getSyntax()
+	 * @generated
+	 */
+	void setSyntax(ImportSyntax value);
 
 } // ExtendedClass

@@ -4,6 +4,7 @@ package implementation.impl;
 
 import implementation.ExtendedClass;
 import implementation.ImplementationPackage;
+import implementation.ImportSyntax;
 import implementation.ModelBehavior;
 
 import java.util.Collection;
@@ -31,6 +32,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link implementation.impl.ModelBehaviorImpl#getClassExtensions <em>Class Extensions</em>}</li>
  *   <li>{@link implementation.impl.ModelBehaviorImpl#getServices <em>Services</em>}</li>
+ *   <li>{@link implementation.impl.ModelBehaviorImpl#getImportSyntaxes <em>Import Syntaxes</em>}</li>
  * </ul>
  *
  * @generated
@@ -55,6 +57,16 @@ public class ModelBehaviorImpl extends MinimalEObjectImpl.Container implements M
 	 * @ordered
 	 */
 	protected EList<String> services;
+
+	/**
+	 * The cached value of the '{@link #getImportSyntaxes() <em>Import Syntaxes</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImportSyntaxes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ImportSyntax> importSyntaxes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -104,11 +116,25 @@ public class ModelBehaviorImpl extends MinimalEObjectImpl.Container implements M
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ImportSyntax> getImportSyntaxes() {
+		if (importSyntaxes == null) {
+			importSyntaxes = new EObjectContainmentEList<ImportSyntax>(ImportSyntax.class, this, ImplementationPackage.MODEL_BEHAVIOR__IMPORT_SYNTAXES);
+		}
+		return importSyntaxes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case ImplementationPackage.MODEL_BEHAVIOR__CLASS_EXTENSIONS:
 				return ((InternalEList<?>)getClassExtensions()).basicRemove(otherEnd, msgs);
+			case ImplementationPackage.MODEL_BEHAVIOR__IMPORT_SYNTAXES:
+				return ((InternalEList<?>)getImportSyntaxes()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -125,6 +151,8 @@ public class ModelBehaviorImpl extends MinimalEObjectImpl.Container implements M
 				return getClassExtensions();
 			case ImplementationPackage.MODEL_BEHAVIOR__SERVICES:
 				return getServices();
+			case ImplementationPackage.MODEL_BEHAVIOR__IMPORT_SYNTAXES:
+				return getImportSyntaxes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -146,6 +174,10 @@ public class ModelBehaviorImpl extends MinimalEObjectImpl.Container implements M
 				getServices().clear();
 				getServices().addAll((Collection<? extends String>)newValue);
 				return;
+			case ImplementationPackage.MODEL_BEHAVIOR__IMPORT_SYNTAXES:
+				getImportSyntaxes().clear();
+				getImportSyntaxes().addAll((Collection<? extends ImportSyntax>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -164,6 +196,9 @@ public class ModelBehaviorImpl extends MinimalEObjectImpl.Container implements M
 			case ImplementationPackage.MODEL_BEHAVIOR__SERVICES:
 				getServices().clear();
 				return;
+			case ImplementationPackage.MODEL_BEHAVIOR__IMPORT_SYNTAXES:
+				getImportSyntaxes().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -180,6 +215,8 @@ public class ModelBehaviorImpl extends MinimalEObjectImpl.Container implements M
 				return classExtensions != null && !classExtensions.isEmpty();
 			case ImplementationPackage.MODEL_BEHAVIOR__SERVICES:
 				return services != null && !services.isEmpty();
+			case ImplementationPackage.MODEL_BEHAVIOR__IMPORT_SYNTAXES:
+				return importSyntaxes != null && !importSyntaxes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

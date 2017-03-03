@@ -85,13 +85,22 @@ public interface ImplementationPackage extends EPackage {
 	int MODEL_BEHAVIOR__SERVICES = 1;
 
 	/**
+	 * The feature id for the '<em><b>Import Syntaxes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_BEHAVIOR__IMPORT_SYNTAXES = 2;
+
+	/**
 	 * The number of structural features of the '<em>Model Behavior</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_BEHAVIOR_FEATURE_COUNT = 2;
+	int MODEL_BEHAVIOR_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>Model Behavior</em>' class.
@@ -149,13 +158,22 @@ public interface ImplementationPackage extends EPackage {
 	int EXTENDED_CLASS__EXTENDS = 3;
 
 	/**
+	 * The feature id for the '<em><b>Syntax</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXTENDED_CLASS__SYNTAX = 4;
+
+	/**
 	 * The number of structural features of the '<em>Extended Class</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXTENDED_CLASS_FEATURE_COUNT = 4;
+	int EXTENDED_CLASS_FEATURE_COUNT = 5;
 
 	/**
 	 * The number of operations of the '<em>Extended Class</em>' class.
@@ -958,6 +976,53 @@ public interface ImplementationPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link implementation.impl.ImportSyntaxImpl <em>Import Syntax</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see implementation.impl.ImportSyntaxImpl
+	 * @see implementation.impl.ImplementationPackageImpl#getImportSyntax()
+	 * @generated
+	 */
+	int IMPORT_SYNTAX = 18;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT_SYNTAX__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT_SYNTAX__URI = 1;
+
+	/**
+	 * The number of structural features of the '<em>Import Syntax</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT_SYNTAX_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Import Syntax</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT_SYNTAX_OPERATION_COUNT = 0;
+
+
+	/**
 	 * Returns the meta object for class '{@link implementation.ModelBehavior <em>Model Behavior</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -988,6 +1053,17 @@ public interface ImplementationPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getModelBehavior_Services();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link implementation.ModelBehavior#getImportSyntaxes <em>Import Syntaxes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Import Syntaxes</em>'.
+	 * @see implementation.ModelBehavior#getImportSyntaxes()
+	 * @see #getModelBehavior()
+	 * @generated
+	 */
+	EReference getModelBehavior_ImportSyntaxes();
 
 	/**
 	 * Returns the meta object for class '{@link implementation.ExtendedClass <em>Extended Class</em>}'.
@@ -1042,6 +1118,17 @@ public interface ImplementationPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getExtendedClass_Extends();
+
+	/**
+	 * Returns the meta object for the reference '{@link implementation.ExtendedClass#getSyntax <em>Syntax</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Syntax</em>'.
+	 * @see implementation.ExtendedClass#getSyntax()
+	 * @see #getExtendedClass()
+	 * @generated
+	 */
+	EReference getExtendedClass_Syntax();
 
 	/**
 	 * Returns the meta object for class '{@link implementation.Behaviored <em>Behaviored</em>}'.
@@ -1578,6 +1665,38 @@ public interface ImplementationPackage extends EPackage {
 	EReference getExpressionStatement_Expression();
 
 	/**
+	 * Returns the meta object for class '{@link implementation.ImportSyntax <em>Import Syntax</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Import Syntax</em>'.
+	 * @see implementation.ImportSyntax
+	 * @generated
+	 */
+	EClass getImportSyntax();
+
+	/**
+	 * Returns the meta object for the attribute '{@link implementation.ImportSyntax#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see implementation.ImportSyntax#getName()
+	 * @see #getImportSyntax()
+	 * @generated
+	 */
+	EAttribute getImportSyntax_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link implementation.ImportSyntax#getUri <em>Uri</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Uri</em>'.
+	 * @see implementation.ImportSyntax#getUri()
+	 * @see #getImportSyntax()
+	 * @generated
+	 */
+	EAttribute getImportSyntax_Uri();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1627,6 +1746,14 @@ public interface ImplementationPackage extends EPackage {
 		EAttribute MODEL_BEHAVIOR__SERVICES = eINSTANCE.getModelBehavior_Services();
 
 		/**
+		 * The meta object literal for the '<em><b>Import Syntaxes</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MODEL_BEHAVIOR__IMPORT_SYNTAXES = eINSTANCE.getModelBehavior_ImportSyntaxes();
+
+		/**
 		 * The meta object literal for the '{@link implementation.impl.ExtendedClassImpl <em>Extended Class</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1667,6 +1794,14 @@ public interface ImplementationPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EXTENDED_CLASS__EXTENDS = eINSTANCE.getExtendedClass_Extends();
+
+		/**
+		 * The meta object literal for the '<em><b>Syntax</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXTENDED_CLASS__SYNTAX = eINSTANCE.getExtendedClass_Syntax();
 
 		/**
 		 * The meta object literal for the '{@link implementation.impl.BehavioredImpl <em>Behaviored</em>}' class.
@@ -2099,6 +2234,32 @@ public interface ImplementationPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EXPRESSION_STATEMENT__EXPRESSION = eINSTANCE.getExpressionStatement_Expression();
+
+		/**
+		 * The meta object literal for the '{@link implementation.impl.ImportSyntaxImpl <em>Import Syntax</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see implementation.impl.ImportSyntaxImpl
+		 * @see implementation.impl.ImplementationPackageImpl#getImportSyntax()
+		 * @generated
+		 */
+		EClass IMPORT_SYNTAX = eINSTANCE.getImportSyntax();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IMPORT_SYNTAX__NAME = eINSTANCE.getImportSyntax_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Uri</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IMPORT_SYNTAX__URI = eINSTANCE.getImportSyntax_Uri();
 
 	}
 

@@ -6,6 +6,8 @@
         eType="#//ExtendedClass" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="services" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="importSyntaxes" upperBound="-1"
+        eType="#//ImportSyntax" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExtendedClass">
     <eStructuralFeatures xsi:type="ecore:EReference" name="baseClass" lowerBound="1"
@@ -16,6 +18,8 @@
         eType="#//VariableDeclaration" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="extends" upperBound="-1"
         eType="#//ExtendedClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="syntax" lowerBound="1"
+        eType="#//ImportSyntax"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Behaviored">
     <eStructuralFeatures xsi:type="ecore:EReference" name="body" lowerBound="1" eType="#//Block"
@@ -116,5 +120,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.acceleo.query/model/ast.ecore#//Expression"
         containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ImportSyntax">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

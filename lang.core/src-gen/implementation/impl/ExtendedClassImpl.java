@@ -5,6 +5,7 @@ package implementation.impl;
 import implementation.Behaviored;
 import implementation.ExtendedClass;
 import implementation.ImplementationPackage;
+import implementation.ImportSyntax;
 import implementation.VariableDeclaration;
 
 import java.util.Collection;
@@ -36,6 +37,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link implementation.impl.ExtendedClassImpl#getMethods <em>Methods</em>}</li>
  *   <li>{@link implementation.impl.ExtendedClassImpl#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link implementation.impl.ExtendedClassImpl#getExtends <em>Extends</em>}</li>
+ *   <li>{@link implementation.impl.ExtendedClassImpl#getSyntax <em>Syntax</em>}</li>
  * </ul>
  *
  * @generated
@@ -80,6 +82,16 @@ public class ExtendedClassImpl extends MinimalEObjectImpl.Container implements E
 	 * @ordered
 	 */
 	protected EList<ExtendedClass> extends_;
+
+	/**
+	 * The cached value of the '{@link #getSyntax() <em>Syntax</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSyntax()
+	 * @generated
+	 * @ordered
+	 */
+	protected ImportSyntax syntax;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -179,6 +191,44 @@ public class ExtendedClassImpl extends MinimalEObjectImpl.Container implements E
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ImportSyntax getSyntax() {
+		if (syntax != null && syntax.eIsProxy()) {
+			InternalEObject oldSyntax = (InternalEObject)syntax;
+			syntax = (ImportSyntax)eResolveProxy(oldSyntax);
+			if (syntax != oldSyntax) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImplementationPackage.EXTENDED_CLASS__SYNTAX, oldSyntax, syntax));
+			}
+		}
+		return syntax;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ImportSyntax basicGetSyntax() {
+		return syntax;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSyntax(ImportSyntax newSyntax) {
+		ImportSyntax oldSyntax = syntax;
+		syntax = newSyntax;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ImplementationPackage.EXTENDED_CLASS__SYNTAX, oldSyntax, syntax));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -207,6 +257,9 @@ public class ExtendedClassImpl extends MinimalEObjectImpl.Container implements E
 				return getAttributes();
 			case ImplementationPackage.EXTENDED_CLASS__EXTENDS:
 				return getExtends();
+			case ImplementationPackage.EXTENDED_CLASS__SYNTAX:
+				if (resolve) return getSyntax();
+				return basicGetSyntax();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -235,6 +288,9 @@ public class ExtendedClassImpl extends MinimalEObjectImpl.Container implements E
 				getExtends().clear();
 				getExtends().addAll((Collection<? extends ExtendedClass>)newValue);
 				return;
+			case ImplementationPackage.EXTENDED_CLASS__SYNTAX:
+				setSyntax((ImportSyntax)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -259,6 +315,9 @@ public class ExtendedClassImpl extends MinimalEObjectImpl.Container implements E
 			case ImplementationPackage.EXTENDED_CLASS__EXTENDS:
 				getExtends().clear();
 				return;
+			case ImplementationPackage.EXTENDED_CLASS__SYNTAX:
+				setSyntax((ImportSyntax)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -279,6 +338,8 @@ public class ExtendedClassImpl extends MinimalEObjectImpl.Container implements E
 				return attributes != null && !attributes.isEmpty();
 			case ImplementationPackage.EXTENDED_CLASS__EXTENDS:
 				return extends_ != null && !extends_.isEmpty();
+			case ImplementationPackage.EXTENDED_CLASS__SYNTAX:
+				return syntax != null;
 		}
 		return super.eIsSet(featureID);
 	}
