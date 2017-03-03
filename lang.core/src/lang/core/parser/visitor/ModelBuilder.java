@@ -1,6 +1,8 @@
 package lang.core.parser.visitor;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.eclipse.acceleo.query.ast.AstFactory;
@@ -13,6 +15,7 @@ import org.eclipse.acceleo.query.runtime.impl.QueryBuilderEngine;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -45,7 +48,9 @@ public class ModelBuilder {
 	public static ModelBuilder singleton;
 	
 	public static ModelBuilder createSingleton(IQueryEnvironment qryEnv) {
-		ModelBuilder.singleton = new ModelBuilder(qryEnv);
+		if(singleton == null) {
+			ModelBuilder.singleton = new ModelBuilder(qryEnv);
+		}
 		return singleton;
 	}
 	
@@ -55,6 +60,7 @@ public class ModelBuilder {
 	ImplementationFactory factory;
 	EcoreFactory ecoreFactory;
 	AstFactory aqlFactory;
+	Map<String,EPackage> currentNamespaces;
 	
 	public ModelBuilder (IQueryEnvironment qryEnv){
 		this.qryEnv = qryEnv;
@@ -63,6 +69,8 @@ public class ModelBuilder {
 		ecoreFactory = (EcoreFactory) qryEnv.getEPackageProvider().getEPackage("ecore").iterator().next().getEFactoryInstance();
 		factory = (ImplementationFactory) qryEnv.getEPackageProvider().getEPackage("implementation").iterator().next().getEFactoryInstance();
 		aqlFactory = (AstFactory) qryEnv.getEPackageProvider().getEPackage("ast").iterator().next().getEFactoryInstance();
+		
+		currentNamespaces = new HashMap<String,EPackage>();
 	}
 	
 	public Method buildMethod(String name, List<Parameter> params, String returnType, Block body, List<String> tags) {
@@ -262,7 +270,26 @@ public class ModelBuilder {
 	}
 	
 	public EClassifier resolve(String className) {
-		//TODO: manage qualified name
+		
+		if(isQualified(className)) {
+			String name = getLastSegment(className);
+			String namespace = getQualifyingPart(className);
+			
+			Optional<EPackage> searchPkg = resolveNs(namespace);
+			if(searchPkg.isPresent()) {
+				Optional<EClassifier> candidate = searchPkg.get()
+					.getEClassifiers()
+					.stream()
+					.filter(cls -> !cls.getEPackage().getName().equals("implementation"))
+					.filter(cls -> cls.getName().equals(name))
+					.findFirst();
+				
+				if(candidate.isPresent()){
+					return candidate.get();
+				}
+			}
+		}
+		
 		Optional<EClassifier> candidate =
 			qryEnv
 			.getEPackageProvider()
@@ -288,6 +315,44 @@ public class ModelBuilder {
 			case "void"		: return null;
 			default			: return EcorePackage.eINSTANCE.getEClassifier();
 		}
+	}
+	
+	public static boolean isQualified(String name) {
+		return name.contains(".");
+	}
+	
+	public static String getLastSegment(String qualifiedName) {
+		int  lastDotIndex = qualifiedName.lastIndexOf(".");
+		
+		if(lastDotIndex == -1 || lastDotIndex == qualifiedName.length() - 1){
+			return qualifiedName;
+		}
+		
+		return qualifiedName.substring(lastDotIndex+1);
+	}
+	
+	public static String getQualifyingPart(String qualifiedName) {
+		int  lastDotIndex = qualifiedName.lastIndexOf(".");
+		
+		if(lastDotIndex == -1 || lastDotIndex == 0){
+			return qualifiedName;
+		}
+		
+		return qualifiedName.substring(0,lastDotIndex);
+	}
+	
+	private Optional<EPackage> resolveNs(String namespace) {
+		return Optional.ofNullable(currentNamespaces.get(namespace));
+	}
+	
+	public Optional<EPackage> resolveUri(String uri) {
+		return 
+			qryEnv
+			.getEPackageProvider()
+			.getRegisteredEPackages()
+			.stream()
+			.filter(p -> p.getNsURI().equals(uri))
+			.findFirst();
 	}
 	
 	public AstResult parse(String expression) {

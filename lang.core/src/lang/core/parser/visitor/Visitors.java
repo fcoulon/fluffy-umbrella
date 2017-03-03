@@ -5,19 +5,27 @@ import implementation.Block;
 import implementation.ExpressionStatement;
 import implementation.ImplementationFactory;
 import implementation.ImplementationPackage;
+import implementation.ImportSyntax;
 import implementation.Parameter;
 import implementation.ModelBehavior;
 import implementation.Statement;
 import implementation.VariableAssignment;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.antlr.v4.runtime.tree.TerminalNode;
 import org.eclipse.acceleo.query.ast.SequenceInExtensionLiteral;
 import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.ecore.EPackage;
 
+import lang.core.parser.AstBuilder;
 import lang.core.parser.XtdAQLBaseVisitor;
 import lang.core.parser.XtdAQLParser.RAssignContext;
 import lang.core.parser.XtdAQLParser.RBlockContext;
@@ -28,6 +36,7 @@ import lang.core.parser.XtdAQLParser.ROperationContext;
 import lang.core.parser.XtdAQLParser.RParametersContext;
 import lang.core.parser.XtdAQLParser.RRootContext;
 import lang.core.parser.XtdAQLParser.RImportServiceContext;
+import lang.core.parser.XtdAQLParser.RImportSyntaxContext;
 import lang.core.parser.XtdAQLParser.RVariableContext;
 import lang.core.parser.XtdAQLParser.RWhileContext;
 import implementation.ExtendedClass;
@@ -384,9 +393,11 @@ public class Visitors {
 	static class ClassVisitor extends XtdAQLBaseVisitor<ExtendedClass> {
 		
 		ParseResult<ModelBehavior> parseRes;
+		Map<String,ModelBehavior> importedBehaviors;
 		
-		public ClassVisitor(ParseResult<ModelBehavior> parseRes) {
+		public ClassVisitor(ParseResult<ModelBehavior> parseRes, Map<String,ModelBehavior> importedBehaviors) {
 			this.parseRes = parseRes;
+			this.importedBehaviors = importedBehaviors;
 		}
 		
 		@Override
@@ -407,11 +418,31 @@ public class Visitors {
 					.map(op -> subVisitor2.visit(op))
 					.collect(Collectors.toList());
 			ExtendedClass res = ModelBuilder.singleton.buildExtendedClass(name,attributes,operations);
+			
+			if(ctx.Qualified().size() == 2 ){
+				String extendName = ctx.Qualified().get(1).getText();
+				if(ModelBuilder.isQualified(extendName)){
+					String xtdName = ModelBuilder.getLastSegment(extendName);
+					String qualifying = ModelBuilder.getQualifyingPart(extendName);
+					ModelBehavior superBhv = importedBehaviors.get(qualifying);
+					if(superBhv != null){
+						Optional<ExtendedClass> superCls = 
+							superBhv
+							.getClassExtensions()
+							.stream()
+							.filter(cls -> cls.getBaseClass().getName().equals(xtdName))
+							.findFirst();
+						if(superCls.isPresent()){
+							res.getExtends().add(superCls.get());
+						}
+					}
+				}
+			}
+			
 			parseRes.getStartPositions().put(res,ctx.start.getStartIndex());
 			parseRes.getEndPositions().put(res,ctx.stop.getStopIndex());
 			return res;
 		}
-		
 	}
 	
 	static class AttributeVisitor extends XtdAQLBaseVisitor<VariableDeclaration> {
@@ -467,16 +498,72 @@ public class Visitors {
 	static class ModelBehaviorVisitor extends XtdAQLBaseVisitor<ModelBehavior> {
 		
 		ParseResult<ModelBehavior> parseRes;
+		AstBuilder currentBuilder;
+		Map<String,EPackage> namespaces;
 		
-		public ModelBehaviorVisitor(ParseResult<ModelBehavior> parseRes) {
+		public ModelBehaviorVisitor(ParseResult<ModelBehavior> parseRes, Map<String,EPackage> namespaces, AstBuilder builder) {
 			this.parseRes = parseRes;
+			this.namespaces = namespaces;
+			this.currentBuilder = builder;
 		}
 		
 		@Override
 		public ModelBehavior visitRRoot(RRootContext ctx) {
-			ClassVisitor subVisitor = new ClassVisitor(parseRes);
+			
 			ImplementationFactory factory = (ImplementationFactory) ImplementationPackage.eINSTANCE.getEFactoryInstance();
 			ModelBehavior res = factory.createModelBehavior();
+			
+			/*
+			 * Resolve syntax mapping
+			 */
+			ctx
+			.rImportSyntax()
+			.stream()
+			.forEach(importCtx -> {
+				String uri = importCtx.STRING().getText();
+				String namespace = importCtx.Ident().getText();
+				
+				Optional<EPackage> searchPkg = ModelBuilder.singleton.resolveUri(uri);
+				if(searchPkg.isPresent()){
+					namespaces.putIfAbsent(namespace,searchPkg.get());
+				}
+			});
+			namespaces
+			.entrySet()
+			.stream()
+			.forEach(entry -> {
+				ImportSyntax importSyntax = factory.createImportSyntax();
+				importSyntax.setName(entry.getKey());
+				importSyntax.setUri(entry.getValue().getNsURI());
+			});
+			
+			/*
+			 * Visit imported Behaviors
+			 */
+			Map<String,ModelBehavior> importedBehaviors = new HashMap<String,ModelBehavior>(); 
+			ctx
+			.rImportSemantic()
+			.stream()
+			.forEach(importCtx -> {
+				String behaviorID = importCtx.Qualified().getText();
+				String behaviorNs = importCtx.Ident().get(0).getText();
+				String importPkgNs = importCtx.Ident().get(1).getText();
+				String currentPkgNs = importCtx.Ident().get(2).getText();
+				
+				Optional<File> file = currentBuilder.resolve(behaviorID);
+				if(file.isPresent()){
+					Map<String,EPackage> newNamespaces = new HashMap<String,EPackage>();
+					newNamespaces.put(importPkgNs, namespaces.get(currentPkgNs));
+					String fileContent = AstBuilder.getFileContent(file.get().getPath());
+					ParseResult<ModelBehavior> importedBhv = currentBuilder.parse(fileContent, newNamespaces); //TODO: merge error msg
+					importedBehaviors.put(behaviorNs, importedBhv.getRoot());
+				}
+			});
+			
+			/*
+			 * Visit class extensions
+			 */
+			ClassVisitor subVisitor = new ClassVisitor(parseRes,importedBehaviors);
 			
 			res.getClassExtensions().addAll(
 					ctx
@@ -501,10 +588,10 @@ public class Visitors {
 		}
 	}
 	
-	public static ParseResult<ModelBehavior> visit(RRootContext rootCtx) {
+	public static ParseResult<ModelBehavior> visit(RRootContext rootCtx, Map<String,EPackage> initNamespaces, AstBuilder builder) {
 		ParseResult<ModelBehavior> result = new ParseResult<ModelBehavior>();
 		result.setDiagnostic(new BasicDiagnostic());
-		ModelBehavior root = (new ModelBehaviorVisitor(result)).visit(rootCtx);
+		ModelBehavior root = (new ModelBehaviorVisitor(result,initNamespaces,builder)).visit(rootCtx);
 		result.setRoot(root);
 		return result;
 	}
