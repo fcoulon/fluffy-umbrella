@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Stream;
 
 import org.eclipse.emf.codegen.ecore.generator.Generator;
 import org.eclipse.emf.codegen.ecore.generator.GeneratorAdapterFactory;
@@ -12,16 +13,24 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelFactory;
 import org.eclipse.emf.codegen.ecore.genmodel.generator.GenBaseGeneratorAdapter;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
+import implementation.ExtendedClass;
 import implementation.ImportSyntax;
 import implementation.ModelBehavior;
+import implementation.VariableDeclaration;
 import implementation.util.ImplementationSwitch;
 import lang.LangInterpreter;
 import lang.core.parser.AstBuilder;
@@ -50,7 +59,7 @@ public class Compiler {
 		 * Final step: Generating the emf code from the ecore generated
 		 */
 
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl());
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("genmodel", new XMIResourceFactoryImpl());
 
 		// resSet.getURIConverter().getURIMap().putAll(EcorePlugin.computePlatformURIMap(true));
 
@@ -86,14 +95,16 @@ public class Compiler {
 		 * 
 		 */
 
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore", new XMIResourceFactoryImpl());
+		final String languageNameClean = languageName.replaceAll("\\.", "");
+
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
 
 		final URI createUri = URI.createPlatformResourceURI("/" + projectName + "/src-gen/" + languageName + ".ecore",
 				true);
 		final Resource res = resSet.createResource(createUri);
 		final EPackage rootPackage = EcoreFactory.eINSTANCE.createEPackage();
-		rootPackage.setName(languageName);
-		rootPackage.setNsPrefix(languageName);
+		rootPackage.setName(languageNameClean);
+		rootPackage.setNsPrefix(languageNameClean);
 		rootPackage.setNsURI("http://" + languageName);
 		res.getContents().add(rootPackage);
 		for (final Entry<String, EPackage> ePackage : syntaxes.entrySet()) {
@@ -101,17 +112,23 @@ public class Compiler {
 			final EPackage copy = EcoreUtil.copy(ePackage.getValue());
 			for (final EPackage eSubPackage : copy.getESubpackages()) {
 				final String initialName = eSubPackage.getName();
-				eSubPackage.setName(languageName + ePackage.getKey() + initialName);
-				eSubPackage.setNsPrefix(languageName + copy.getNsPrefix());
-				eSubPackage.setNsURI("http://" + languageName + "/" + initialName);
+				eSubPackage.setName(languageNameClean + ePackage.getKey() + initialName);
+				eSubPackage.setNsPrefix(languageNameClean + copy.getNsPrefix());
+				eSubPackage.setNsURI("http://" + languageNameClean + "/" + initialName);
 			}
 
 			final String initialName = ePackage.getKey();
-			copy.setName(languageName + initialName);
-			copy.setNsPrefix(languageName + copy.getNsPrefix());
+			copy.setName(languageNameClean + initialName);
+			copy.setNsPrefix(languageNameClean + copy.getNsPrefix());
 			copy.setNsURI("http://" + languageName + "/" + initialName);
 			rootPackage.getESubpackages().add(copy);
 		}
+		
+		
+		resSet.getPackageRegistry().put(rootPackage.getNsURI(), rootPackage);
+
+
+		this.completeFields(rootPackage);
 
 		try {
 			res.save(null);
@@ -139,16 +156,9 @@ public class Compiler {
 	public Map<String, EPackage> getListSyntaxes() {
 		final ModelBehavior root = getRoot();
 		final Map<String, EPackage> syntaxes = new HashMap<>();
-		new ImplementationSwitch<Void>() {
 
-			@Override
-			public Void caseImportSyntax(final ImportSyntax object) {
-
-				syntaxes.put(object.getName(), EPackage.Registry.INSTANCE.getEPackage(object.getUri()));
-				return null;
-			}
-
-		}.doSwitch(root);
+		root.getImportSyntaxes().forEach(
+				object -> syntaxes.put(object.getName(), EPackage.Registry.INSTANCE.getEPackage(object.getUri())));
 
 		return syntaxes;
 	}
@@ -159,8 +169,46 @@ public class Compiler {
 			final ParseResult<ModelBehavior> parse = new AstBuilder(interpreter.getQueryEnvironment())
 					.parse(sourceCode);
 			this.root = parse.getRoot();
-		} 
+		}
 		return this.root;
+	}
+
+	public void completeFields(final EPackage languagePackage) {
+
+		this.root.getClassExtensions().stream().flatMap(ce -> ce.getAttributes().stream()).forEach(attribute -> {
+			final ExtendedClass extendedClass = (ExtendedClass) attribute.eContainer();
+			final String namespace = extendedClass.getSyntax().getName();
+
+			final EList<EPackage> listPackages = languagePackage.getESubpackages();
+			final String target = languagePackage.getName() + namespace;
+			final EPackage namespacePackage = listPackages.stream().filter(p -> p.getName().equals(target)).findFirst()
+					.get();
+			
+			final EClass classToUpdate = namespacePackage.eContents().stream().filter(e -> e instanceof EClass).map(e -> (EClass) e).filter(e -> e.getName().equals(extendedClass.getBaseClass().getName())).findAny().get();
+			final EAttribute createEAttribute = EcoreFactory.eINSTANCE.createEAttribute();
+			createEAttribute.setName(attribute.getName());
+			createEAttribute.setEType(EcorePackage.eINSTANCE.getEString());
+			classToUpdate.getEAttributes().add(createEAttribute);
+		});
+
+	}
+
+	public void compile(String projectName) {
+		final Map<String, EPackage> syntaxes = this.getListSyntaxes();
+
+		final ModelBehavior language = this.getRoot();
+
+		final ResourceSetImpl resSet = new ResourceSetImpl();
+		// TODO: replace fsm by the language name (or project name)
+		final EPackage languagePackage = this.initializeLanguageEcore(syntaxes, language.getName(), resSet,
+				projectName);
+
+		// TODO : alterate the language package with the semantical
+		// constructions defined in the body
+
+		GenModel languageGenerator = this.saveGenModel(resSet, language.getName(), languagePackage, "fsm");
+
+		this.proceedToGeneration(languageGenerator);
 	}
 
 }

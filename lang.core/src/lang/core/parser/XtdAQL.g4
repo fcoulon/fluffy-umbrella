@@ -17,14 +17,14 @@ LINECOMMENT : '//' ~[\r\n]* -> skip; //Line comment
  */
 
 rRoot : 
-	'behavior' Qualified
+	'behavior' name=Qualified
 	rImportSyntax*
 	rImportSemantic*
 	rImportService*
 	rClass*
 ;
 
-rImportSyntax : 'import' 'syntax' STRING 'as' Ident ';'
+rImportSyntax : 'import' 'syntax' uri=STRING 'as' name=Ident ';'
 ;
 
 rImportSemantic : 'import' 'semantic' Qualified 'as' Ident '(' Ident '=>' Ident ')' ';'
@@ -33,7 +33,7 @@ rImportSemantic : 'import' 'semantic' Qualified 'as' Ident '(' Ident '=>' Ident 
 rImportService : 'import' 'service' Qualified ';'
 ;
 
-rClass : 'class' Qualified ('extends' Qualified)? '{' rAttribute* rOperation* '}'
+rClass : 'class' name=Qualified ('extends' Qualified)? '{' rAttribute* rOperation* '}'
 ; 
 
 rOperation : (rTag)* ('def' | 'override') (Qualified|'String') Ident '(' rParameters? ')' rBlock
@@ -88,6 +88,9 @@ rExpression : expression ';'
 ;
 
 STRING :  '"' (.)*? '"'
+;
+
+Ident : (Letter | '_') (Letter | [0-9] | '_')*
 ;
 
 Qualified : Ident ('.'Ident)*

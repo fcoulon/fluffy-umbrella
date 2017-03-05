@@ -1,5 +1,5 @@
-antlr4.antlrRegisteredTools=4.4@/tmp/antlr-4.4-complete.jar\:4.3@/home/fcoulon/gemoc/antlr-4.3-complete.jar
-antlr4.antlrToolPath=/home/fcoulon/gemoc/antlr-4.3-complete.jar
+antlr4.antlrRegisteredTools=4.4@/tmp/antlr-4.4-complete.jar\:4.3@/home/mleduc/tools/antlr-4.3-complete.jar
+antlr4.antlrToolPath=/home/mleduc/tools/antlr-4.3-complete.jar
 antlr4.encoding=UTF-8
 antlr4.listener=true
 antlr4.visitor=true
@@ -10,4 +10,4 @@ eclipse.preferences.version=1
 is_project_specific=
 outlet.DEFAULT_OUTPUT.cleanupDerived=true
 outlet.DEFAULT_OUTPUT.derived=true
-outlet.DEFAULT_OUTPUT.directory=./src-gen
+outlet.DEFAULT_OUTPUT.directory=./target/generated-sources/antlr4
