@@ -96,7 +96,7 @@ public class MyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     'def' | 'override'
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     (rule start) rTag* (ambiguity) type=ID
+	 *     (rule start) rTag* (ambiguity) type=Qualified
 	 */
 	protected void emit_rOperation_DefKeyword_1_0_or_OverrideKeyword_1_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -107,7 +107,7 @@ public class MyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     rTag*
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     (rule start) (ambiguity) ('def' | 'override') type=ID
+	 *     (rule start) (ambiguity) ('def' | 'override') type=Qualified
 	 */
 	protected void emit_rOperation_RTagParserRuleCall_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

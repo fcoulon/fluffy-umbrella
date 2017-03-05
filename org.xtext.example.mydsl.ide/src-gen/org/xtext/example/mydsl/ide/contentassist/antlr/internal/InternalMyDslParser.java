@@ -22856,24 +22856,28 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ROperation__TypeAssignment_2"
-    // InternalMyDsl.g:7175:1: rule__ROperation__TypeAssignment_2 : ( RULE_ID ) ;
+    // InternalMyDsl.g:7175:1: rule__ROperation__TypeAssignment_2 : ( ruleQualified ) ;
     public final void rule__ROperation__TypeAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMyDsl.g:7179:1: ( ( RULE_ID ) )
-            // InternalMyDsl.g:7180:2: ( RULE_ID )
+            // InternalMyDsl.g:7179:1: ( ( ruleQualified ) )
+            // InternalMyDsl.g:7180:2: ( ruleQualified )
             {
-            // InternalMyDsl.g:7180:2: ( RULE_ID )
-            // InternalMyDsl.g:7181:3: RULE_ID
+            // InternalMyDsl.g:7180:2: ( ruleQualified )
+            // InternalMyDsl.g:7181:3: ruleQualified
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getROperationAccess().getTypeIDTerminalRuleCall_2_0()); 
+               before(grammarAccess.getROperationAccess().getTypeQualifiedParserRuleCall_2_0()); 
             }
-            match(input,RULE_ID,FOLLOW_2); if (state.failed) return ;
+            pushFollow(FOLLOW_2);
+            ruleQualified();
+
+            state._fsp--;
+            if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getROperationAccess().getTypeIDTerminalRuleCall_2_0()); 
+               after(grammarAccess.getROperationAccess().getTypeQualifiedParserRuleCall_2_0()); 
             }
 
             }
@@ -23118,24 +23122,28 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RVariable__TypeAssignment_0"
-    // InternalMyDsl.g:7265:1: rule__RVariable__TypeAssignment_0 : ( RULE_ID ) ;
+    // InternalMyDsl.g:7265:1: rule__RVariable__TypeAssignment_0 : ( ruleQualified ) ;
     public final void rule__RVariable__TypeAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMyDsl.g:7269:1: ( ( RULE_ID ) )
-            // InternalMyDsl.g:7270:2: ( RULE_ID )
+            // InternalMyDsl.g:7269:1: ( ( ruleQualified ) )
+            // InternalMyDsl.g:7270:2: ( ruleQualified )
             {
-            // InternalMyDsl.g:7270:2: ( RULE_ID )
-            // InternalMyDsl.g:7271:3: RULE_ID
+            // InternalMyDsl.g:7270:2: ( ruleQualified )
+            // InternalMyDsl.g:7271:3: ruleQualified
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getRVariableAccess().getTypeIDTerminalRuleCall_0_0()); 
+               before(grammarAccess.getRVariableAccess().getTypeQualifiedParserRuleCall_0_0()); 
             }
-            match(input,RULE_ID,FOLLOW_2); if (state.failed) return ;
+            pushFollow(FOLLOW_2);
+            ruleQualified();
+
+            state._fsp--;
+            if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getRVariableAccess().getTypeIDTerminalRuleCall_0_0()); 
+               after(grammarAccess.getRVariableAccess().getTypeQualifiedParserRuleCall_0_0()); 
             }
 
             }

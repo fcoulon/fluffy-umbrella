@@ -314,7 +314,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cDefKeyword_1_0 = (Keyword)cAlternatives_1.eContents().get(0);
 		private final Keyword cOverrideKeyword_1_1 = (Keyword)cAlternatives_1.eContents().get(1);
 		private final Assignment cTypeAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cTypeIDTerminalRuleCall_2_0 = (RuleCall)cTypeAssignment_2.eContents().get(0);
+		private final RuleCall cTypeQualifiedParserRuleCall_2_0 = (RuleCall)cTypeAssignment_2.eContents().get(0);
 		private final Assignment cNameAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cNameIDTerminalRuleCall_3_0 = (RuleCall)cNameAssignment_3.eContents().get(0);
 		private final Keyword cLeftParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
@@ -325,10 +325,10 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cBodyRBlockParserRuleCall_7_0 = (RuleCall)cBodyAssignment_7.eContents().get(0);
 		
 		//rOperation:
-		//	rTag* ('def' | 'override') type=ID name=ID '(' paramList+=rParameters? ')' body=rBlock;
+		//	rTag* ('def' | 'override') type=Qualified name=ID '(' paramList+=rParameters? ')' body=rBlock;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//rTag* ('def' | 'override') type=ID name=ID '(' paramList+=rParameters? ')' body=rBlock
+		//rTag* ('def' | 'override') type=Qualified name=ID '(' paramList+=rParameters? ')' body=rBlock
 		public Group getGroup() { return cGroup; }
 		
 		//rTag*
@@ -343,11 +343,11 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		//'override'
 		public Keyword getOverrideKeyword_1_1() { return cOverrideKeyword_1_1; }
 		
-		//type=ID
+		//type=Qualified
 		public Assignment getTypeAssignment_2() { return cTypeAssignment_2; }
 		
-		//ID
-		public RuleCall getTypeIDTerminalRuleCall_2_0() { return cTypeIDTerminalRuleCall_2_0; }
+		//Qualified
+		public RuleCall getTypeQualifiedParserRuleCall_2_0() { return cTypeQualifiedParserRuleCall_2_0; }
 		
 		//name=ID
 		public Assignment getNameAssignment_3() { return cNameAssignment_3; }
@@ -431,22 +431,22 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.MyDsl.rVariable");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cTypeIDTerminalRuleCall_0_0 = (RuleCall)cTypeAssignment_0.eContents().get(0);
+		private final RuleCall cTypeQualifiedParserRuleCall_0_0 = (RuleCall)cTypeAssignment_0.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//rVariable:
-		//	type=ID name=ID;
+		//	type=Qualified name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//type=ID name=ID
+		//type=Qualified name=ID
 		public Group getGroup() { return cGroup; }
 		
-		//type=ID
+		//type=Qualified
 		public Assignment getTypeAssignment_0() { return cTypeAssignment_0; }
 		
-		//ID
-		public RuleCall getTypeIDTerminalRuleCall_0_0() { return cTypeIDTerminalRuleCall_0_0; }
+		//Qualified
+		public RuleCall getTypeQualifiedParserRuleCall_0_0() { return cTypeQualifiedParserRuleCall_0_0; }
 		
 		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
@@ -1839,7 +1839,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//rOperation:
-	//	rTag* ('def' | 'override') type=ID name=ID '(' paramList+=rParameters? ')' body=rBlock;
+	//	rTag* ('def' | 'override') type=Qualified name=ID '(' paramList+=rParameters? ')' body=rBlock;
 	public ROperationElements getROperationAccess() {
 		return pROperation;
 	}
@@ -1869,7 +1869,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//rVariable:
-	//	type=ID name=ID;
+	//	type=Qualified name=ID;
 	public RVariableElements getRVariableAccess() {
 		return pRVariable;
 	}
