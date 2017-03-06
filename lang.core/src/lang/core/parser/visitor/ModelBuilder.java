@@ -14,6 +14,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -79,7 +80,7 @@ public class ModelBuilder {
 			operation.getEParameters().add(opParam);
 		});
 		
-		EClassifier type = resolve(returnType);
+		EClassifier type = resolve(returnType, null);
 		operation.setEType(type);
 		
 		Method newMethod = factory.createMethod();
@@ -109,7 +110,7 @@ public class ModelBuilder {
 	public Parameter buildParameter(String type, String name) {
 		Parameter param = factory.createParameter();
 		param.setName(name);
-		param.setType(resolve(type));
+		param.setType(resolve(type, null));
 		return param;
 	}
 	
@@ -119,7 +120,7 @@ public class ModelBuilder {
 		if(exp != null){
 			varDecl.setInitialValue(builder.build(exp).getAst());
 		}
-		varDecl.setType(resolve(type));
+		varDecl.setType(resolve(type, null));
 		return varDecl;
 	}
 	
@@ -207,18 +208,16 @@ public class ModelBuilder {
 	}
 	
 	public ExtendedClass buildExtendedClass(final String baseCls, final List<VariableDeclaration> vars,
-			final List<Behaviored> operations, ModelBehavior modelBehavior) {
+			final List<Behaviored> operations, final ModelBehavior modelBehavior) {
 		final ExtendedClass cls = factory.createExtendedClass();
-		final EClassifier resolvedType = resolve(baseCls);
+		final EList<ImportSyntax> importSyntaxes = modelBehavior.getImportSyntaxes();
+		final ImportSyntax value = importSyntaxes.stream().filter(syntax -> syntax.getName().equals(baseCls.split("\\.")[0])).findAny().get();
+		cls.setSyntax(value);
+		final EClassifier resolvedType = resolve(baseCls, EPackage.Registry.INSTANCE.getEPackage(value.getUri()));
 		if (resolvedType instanceof EClass)
 			cls.setBaseClass((EClass) resolvedType);
 		cls.getMethods().addAll(operations);
 		cls.getAttributes().addAll(vars);
-		EList<ImportSyntax> importSyntaxes = modelBehavior.getImportSyntaxes();
-		ImportSyntax value = importSyntaxes.stream().filter(syntax -> {
-			return syntax.getName().equals(baseCls.split("\\.")[0]);
-		}).findAny().get();
-		cls.setSyntax(value);
 		return cls;
 	}
 	
@@ -254,7 +253,7 @@ public class ModelBuilder {
 	
 	//Can return null
 	public Optional<EOperation> resolve(String className, String methodName, int nbArgs, String returnType) {
-		EClassifier type = resolve(returnType);
+		EClassifier type = resolve(returnType, null);
 		//TODO: manage qualified name		
 		Optional<EOperation> eOperation = 
 			qryEnv
@@ -270,8 +269,16 @@ public class ModelBuilder {
 		return eOperation;
 	}
 	
-	public EClassifier resolve(String className) {
+	public EClassifier resolve(String className, EPackage package1) {
 		//TODO: manage qualified name
+		
+		// TODO: relly ugly, need to be refactored.
+		if (package1 != null) {
+			String className2 = className.split("\\.")[1];
+			EClassifier found = package1.eContents().stream().filter(c -> c instanceof EClass).map(c -> (EClass) c).filter(c -> c.getName().equals(className2)).findAny().get();
+			return found;
+		}
+		
 		Optional<EClassifier> candidate =
 			qryEnv
 			.getEPackageProvider()

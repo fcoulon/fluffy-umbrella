@@ -17,7 +17,7 @@ LINECOMMENT : '//' ~[\r\n]* -> skip; //Line comment
  */
 
 rRoot : 
-	'behavior' name=Qualified
+	'behavior' name=qualified
 	rImportSyntax*
 	rImportSemantic*
 	rImportService*
@@ -27,17 +27,19 @@ rRoot :
 rImportSyntax : 'import' 'syntax' uri=STRING 'as' name=Ident ';'
 ;
 
-rImportSemantic : 'import' 'semantic' Qualified 'as' Ident '(' Ident '=>' Ident ')' ';'
+rImportSemantic : 'import' 'semantic' qualified 'as' Ident '(' Ident '=>' Ident ')' ';'
 ;
 
-rImportService : 'import' 'service' Qualified ';'
+rImportService : 'import' 'service' qualified ';'
 ;
 
-rClass : 'class' name=Qualified ('extends' Qualified)? '{' rAttribute* rOperation* '}'
+rClass : 'class' name=qualified ('extends' qualified)? '{' rAttribute* rOperation* '}'
 ; 
 
-rOperation : (rTag)* ('def' | 'override') (Qualified|'String') Ident '(' rParameters? ')' rBlock
+rOperation : (tags+=rTag)* ('def' | 'override') type=rType name=Ident '(' parameters=rParameters? ')' body=rBlock
 ;
+
+rType:qualified|typeLiteral;
 
 rTag : '@'Ident
 ; 
@@ -45,10 +47,10 @@ rTag : '@'Ident
 rParameters : rVariable (',' rVariable)*
 ;
 
-rVariable : (Qualified|'String') Ident
+rVariable : type=rType name=Ident
 ;
 
-rAttribute : (Qualified|'String') Ident (':=' expression)? ';'
+rAttribute : type=rType name=Ident (':=' value=expression)? ';'
 ;
 
 /*
@@ -63,7 +65,7 @@ rStatement : rVarDecl
 		| rExpression
 ;
 
-rVarDecl : (Qualified|'String') Ident (':=' expression)? ';'
+rVarDecl : type=rType name=Ident (':=' value=expression)? ';'
 ;
 
 rAssign : expression ':=' expression ';'
@@ -90,8 +92,5 @@ rExpression : expression ';'
 STRING :  '"' (.)*? '"'
 ;
 
-Ident : (Letter | '_') (Letter | [0-9] | '_')*
-;
-
-Qualified : Ident ('.'Ident)*
+qualified : Ident ('.'Ident)*
 ;

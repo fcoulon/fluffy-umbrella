@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.stream.Stream;
 
 import org.eclipse.emf.codegen.ecore.generator.Generator;
 import org.eclipse.emf.codegen.ecore.generator.GeneratorAdapterFactory;
@@ -15,9 +14,10 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenModelFactory;
 import org.eclipse.emf.codegen.ecore.genmodel.generator.GenBaseGeneratorAdapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -28,10 +28,11 @@ import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import implementation.ExtendedClass;
+import implementation.Implementation;
+import implementation.ImplementationPackage;
 import implementation.ImportSyntax;
+import implementation.Method;
 import implementation.ModelBehavior;
-import implementation.VariableDeclaration;
-import implementation.util.ImplementationSwitch;
 import lang.LangInterpreter;
 import lang.core.parser.AstBuilder;
 import lang.core.parser.visitor.ParseResult;
@@ -123,12 +124,11 @@ public class Compiler {
 			copy.setNsURI("http://" + languageName + "/" + initialName);
 			rootPackage.getESubpackages().add(copy);
 		}
-		
-		
+
 		resSet.getPackageRegistry().put(rootPackage.getNsURI(), rootPackage);
 
-
 		this.completeFields(rootPackage);
+		this.completeMethods(rootPackage);
 
 		try {
 			res.save(null);
@@ -157,7 +157,8 @@ public class Compiler {
 		final ModelBehavior root = getRoot();
 		final Map<String, EPackage> syntaxes = new HashMap<>();
 
-		root.getImportSyntaxes().forEach(
+		final EList<ImportSyntax> importSyntaxes = root.getImportSyntaxes();
+		importSyntaxes.forEach(
 				object -> syntaxes.put(object.getName(), EPackage.Registry.INSTANCE.getEPackage(object.getUri())));
 
 		return syntaxes;
@@ -173,6 +174,51 @@ public class Compiler {
 		return this.root;
 	}
 
+	private void completeMethods(EPackage languagePackage) {
+		this.root.getClassExtensions().stream().flatMap(ce -> ce.getMethods().stream()).forEach(behaviored -> {
+			ExtendedClass extendedClass = (ExtendedClass) behaviored.eContainer();
+
+			String namespace = extendedClass.getSyntax().getName();
+
+			EList<EPackage> listPackages = languagePackage.getESubpackages();
+			final String target = languagePackage.getName() + namespace;
+
+			final EPackage namespacePackage = listPackages.stream().filter(p -> p.getName().equals(target)).findFirst()
+					.get();
+
+			final EClass classToUpdate = namespacePackage.eContents().stream().filter(e -> e instanceof EClass)
+					.map(e -> (EClass) e).filter(e -> e.getName().equals(extendedClass.getBaseClass().getName()))
+					.findAny().get();
+
+			if (behaviored.eClass().getClassifierID() == ImplementationPackage.IMPLEMENTATION) {
+
+				// implementation = override
+				// in this case a EOperation already exists !
+				Implementation implementation = (Implementation) behaviored;
+
+				EOperation eOperation = classToUpdate.getEOperations().stream()
+						.filter(eop -> eop.getName().equals(implementation.getOperationRef().getName())).findAny()
+						.get();
+
+				EAnnotation createEAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
+				createEAnnotation.setSource("http://www.eclipse.org/emf/2002/GenModel");
+				createEAnnotation.getDetails().put("body", "System.out.println()");
+				eOperation.getEAnnotations().add(createEAnnotation);
+		
+
+			} else {
+				// method
+				Method method = (Method) behaviored;
+				EOperation eOperation = EcoreUtil.copy(method.getOperationDef());
+				EAnnotation createEAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
+				createEAnnotation.setSource("http://www.eclipse.org/emf/2002/GenModel");
+				createEAnnotation.getDetails().put("body", "System.out.println();");
+				eOperation.getEAnnotations().add(createEAnnotation);
+				classToUpdate.getEOperations().add(eOperation);
+			}
+		});
+	}
+
 	public void completeFields(final EPackage languagePackage) {
 
 		this.root.getClassExtensions().stream().flatMap(ce -> ce.getAttributes().stream()).forEach(attribute -> {
@@ -184,11 +230,13 @@ public class Compiler {
 			final EPackage namespacePackage = listPackages.stream().filter(p -> p.getName().equals(target)).findFirst()
 					.get();
 			
-			final EClass classToUpdate = namespacePackage.eContents().stream().filter(e -> e instanceof EClass).map(e -> (EClass) e).filter(e -> e.getName().equals(extendedClass.getBaseClass().getName())).findAny().get();
+			String targetClass = extendedClass.getBaseClass().getName();
+			final EClass classToUpdate = namespacePackage.eContents().stream().filter(e -> e instanceof EClass)
+					.map(e -> (EClass) e).filter(e -> e.getName().equals(targetClass)).findAny().get();
 			final EAttribute createEAttribute = EcoreFactory.eINSTANCE.createEAttribute();
 			createEAttribute.setName(attribute.getName());
 			createEAttribute.setEType(EcorePackage.eINSTANCE.getEString());
-			classToUpdate.getEAttributes().add(createEAttribute);
+			classToUpdate.getEStructuralFeatures().add(createEAttribute);
 		});
 
 	}

@@ -95,10 +95,10 @@ public class Visitors {
 
 			String typeName = null;
 
-			if (ctx.Qualified() == null) { // String type
-				typeName = ctx.children.get(0).toString();
+			if (ctx.type.qualified() == null) { // String type
+				typeName = ctx.type.typeLiteral().getText();
 			} else {
-				typeName = ctx.Qualified().getText();
+				typeName = ctx.type.qualified().getText();
 			}
 
 			String name = ctx.Ident().getText();
@@ -284,30 +284,33 @@ public class Visitors {
 		}
 
 		@Override
-		public Behaviored visitROperation(ROperationContext ctx) {
-			String keyword = ctx.children.stream().filter(c -> c instanceof TerminalNode).findFirst().get().getText();
+		public Behaviored visitROperation(final ROperationContext ctx) {
+			final String keyword = ctx.children.stream().filter(c -> c instanceof TerminalNode).findFirst().get().getText();
 
-			String returnType = null;
-			if (ctx.Qualified() == null) { // String type
-				int index = ctx.children.indexOf(ctx.Ident()) - 1; // just
-																	// before
-																	// the name
-				returnType = ctx.children.get(index).toString();
-			} else {
-				returnType = ctx.Qualified().getText();
-			}
+//			String returnType = null;
+//			if (ctx.type == null) { // String type
+//				int index = ctx.children.indexOf(ctx.Ident()) - 1; // just
+//																	// before
+//																	// the name
+//				returnType = ctx.children.get(index).toString();
+//			} else {
+//				returnType = ctx.Qualified().getText();
+//			}
+			
+			final String returnType = ctx.type.getText();
 
-			String operationName = ctx.Ident().getText();
+			final String operationName = ctx.name.getText();
 
 			List<Parameter> parameters = new ArrayList<Parameter>();
-			if (ctx.rParameters() != null)
-				parameters = (new ParamVisitor(parseRes)).visit(ctx.rParameters());
+			if (ctx.parameters != null) {
+				parameters = new ParamVisitor(parseRes).visit(ctx.parameters);
+			}
 
-			Block body = (new BlockVisitor(parseRes)).visit(ctx.rBlock());
+			final Block body = new BlockVisitor(parseRes).visit(ctx.body);
 
-			String className = ctx.parent.getChild(1).getText();
+			final String className = ctx.parent.getChild(1).getText();
 
-			List<String> tags = ctx.rTag().stream().map(t -> t.Ident().getText()).collect(Collectors.toList());
+			final List<String> tags = ctx.tags.stream().map(t -> t.Ident().getText()).collect(Collectors.toList());
 
 			Behaviored res = null;
 			if (keyword.equals("def")) {
@@ -357,10 +360,10 @@ public class Visitors {
 		@Override
 		public Parameter visitRVariable(RVariableContext ctx) {
 			String typeName = null;
-			if (ctx.Qualified() == null) { // String type
-				typeName = ctx.children.get(0).toString();
+			if (ctx.type.qualified() == null) { // String type
+				typeName = ctx.type.typeLiteral().getText();
 			} else {
-				typeName = ctx.Qualified().getText();
+				typeName = ctx.type.qualified().getText();
 			}
 
 			String name = ctx.Ident().getText();
@@ -415,10 +418,10 @@ public class Visitors {
 			}
 
 			String typeName = null;
-			if (ctx.Qualified() == null) { // String type
-				typeName = ctx.children.get(0).toString();
+			if (ctx.type.qualified() == null) { // String type
+				typeName = ctx.type.typeLiteral().getText();
 			} else {
-				typeName = ctx.Qualified().getText();
+				typeName = ctx.type.qualified().getText();
 			}
 
 			String name = ctx.Ident().getText();
