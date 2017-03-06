@@ -1,3 +1,4 @@
+behavior test.selfdynaattrassign;
 class ClassA {
 	
 	String attrib := 'foo';

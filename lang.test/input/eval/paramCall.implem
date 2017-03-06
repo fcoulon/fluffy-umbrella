@@ -1,3 +1,4 @@
+behavior test.paramcall;
 class ClassA {
 	
 	@main

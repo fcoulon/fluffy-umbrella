@@ -1,3 +1,4 @@
+behavior test.dynaattrassign;
 class ClassA {
 	
 	String attrib := 'foo';

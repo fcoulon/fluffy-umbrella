@@ -1,3 +1,4 @@
+behavior test.localdynaattrassign;
 class ClassA {
 	
 	String attrib := 'foo';

@@ -1,3 +1,4 @@
+behavior test.localattr;
 class ClassA {
 	
 	@main

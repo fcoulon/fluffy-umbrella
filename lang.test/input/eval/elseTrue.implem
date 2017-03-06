@@ -1,3 +1,4 @@
+behavior test.esletrue;
 class ClassA {
 	
 	@main

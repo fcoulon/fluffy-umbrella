@@ -1,3 +1,4 @@
+behavior test.elsefalse;
 class ClassA {
 	
 	@main

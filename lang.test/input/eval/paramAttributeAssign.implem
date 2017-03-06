@@ -1,3 +1,4 @@
+behavior test.paramattrassign;
 class ClassA {
 	
 	@main

@@ -1,3 +1,4 @@
+behavior test.paramdynaattribassign;
 class ClassA {
 	
 	String attrib := 'foo';

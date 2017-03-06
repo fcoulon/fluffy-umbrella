@@ -1,3 +1,4 @@
+behavior test.iftrue;
 class ClassA {
 	
 	@main

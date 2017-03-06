@@ -1,4 +1,5 @@
-use lang.core.interpreter.test.Service;
+behavior test.services;
+import service lang.core.interpreter.test.Service;
 
 class ClassA {
 	

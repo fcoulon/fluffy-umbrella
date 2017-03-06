@@ -1,3 +1,4 @@
+behavior test.resdynaattassign;
 class ClassA {
 	
 	String attrib := 'foo';

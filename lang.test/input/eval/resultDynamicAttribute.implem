@@ -1,3 +1,4 @@
+behavior test.redynattr;
 class ClassA {
 	
 	String attrib := 'foo';

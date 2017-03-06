@@ -1,3 +1,4 @@
+behavior test.resultattrassign;
 class ClassA {
 	
 	@main

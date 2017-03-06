@@ -1,3 +1,4 @@
+behavior test.remove;
 class ClassA {
 	
 	@main

@@ -1,3 +1,4 @@
+behavior test.selfattr;
 class ClassA {
 	
 	@main

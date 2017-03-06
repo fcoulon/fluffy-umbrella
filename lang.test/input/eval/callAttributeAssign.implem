@@ -1,3 +1,4 @@
+behavior test.callattrassign;
 class ClassA {
 	
 	@main

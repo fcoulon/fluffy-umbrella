@@ -1,3 +1,4 @@
+behavior test.chainattr;
 class ClassA {
 	
 	@main

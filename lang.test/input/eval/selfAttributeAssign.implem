@@ -1,3 +1,4 @@
+behavior test.selfattassign;
 class ClassA {
 	
 	@main

@@ -1,3 +1,4 @@
+behavior test.selfcall;
 class ClassA {
 	
 	@main
