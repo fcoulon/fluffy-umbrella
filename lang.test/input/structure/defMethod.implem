@@ -1,3 +1,4 @@
+behavior test.defmethod;
 class EClass {
 	def void fooBar(EObject param1, double param2) {
 		EBoolean localVariable;

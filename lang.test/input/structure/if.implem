@@ -1,3 +1,5 @@
+behavior test.ifstmt;
+
 class EPackage {
 	
 	@main

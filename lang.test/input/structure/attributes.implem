@@ -1,3 +1,5 @@
+behavior test.attributes;
+
 class EClass {
 	boolean newAttribute;
 	int initialValue := 0;

@@ -1,3 +1,4 @@
+behavior test.defimpl;
 class EObject {
 	override EClass eClass() {
 		self.log();

@@ -1,3 +1,5 @@
+behavior test.forloop;
+
 class EPackage {
 	
 	@main

@@ -1,4 +1,6 @@
-use lang.core.service.test;
+behavior test.allfeatures;
+
+import service lang.core.services.test;
 
 class EClass {
 	boolean newAttribute;

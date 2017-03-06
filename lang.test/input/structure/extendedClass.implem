@@ -1,3 +1,4 @@
+behavior test.extendedclass;
 class EClass {
 
 }
