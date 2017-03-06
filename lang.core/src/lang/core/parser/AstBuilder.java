@@ -71,7 +71,7 @@ public class AstBuilder {
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		XtdAQLParser parser = new XtdAQLParser(tokens);
 		RRootContext rootCtx  = parser.rRoot();
-		return rootCtx.Qualified().getText();
+		return rootCtx.qualified().getText();
 	}
 	
 	public Optional<File> resolve(String behaviorID) {

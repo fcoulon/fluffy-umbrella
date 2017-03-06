@@ -107,11 +107,11 @@ public class Visitors {
 			
 			String typeName = null;
 			
-			if(ctx.Qualified() == null){ // String type
+			if(ctx.qualified() == null){ // String type
 				typeName = ctx.children.get(0).toString();
 			}
 			else{
-				typeName = ctx.Qualified().getText();
+				typeName = ctx.qualified().getText();
 			}
 			
 			String name = ctx.Ident().getText();
@@ -296,12 +296,12 @@ public class Visitors {
 				.getText();
 			
 			String returnType = null;
-			if(ctx.Qualified() == null){ // String type
+			if(ctx.qualified() == null){ // String type
 				int index = ctx.children.indexOf(ctx.Ident()) - 1; // just before the name
 				returnType = ctx.children.get(index).toString();
 			}
 			else{
-				returnType = ctx.Qualified().getText();
+				returnType = ctx.qualified().getText();
 			}
 			
 			String operationName = ctx.Ident().getText();
@@ -374,11 +374,11 @@ public class Visitors {
 		@Override
 		public Parameter visitRVariable(RVariableContext ctx) {
 			String typeName = null;
-			if(ctx.Qualified() == null){ // String type
+			if(ctx.qualified() == null){ // String type
 				typeName = ctx.children.get(0).toString();
 			}
 			else{
-				typeName = ctx.Qualified().getText();
+				typeName = ctx.qualified().getText();
 			}
 			
 			String name = ctx.Ident().getText();
@@ -402,7 +402,7 @@ public class Visitors {
 		
 		@Override
 		public ExtendedClass visitRClass(RClassContext ctx) {
-			String name = ctx.Qualified().get(0).getText();
+			String name = ctx.qualified().get(0).getText();
 			AttributeVisitor subVisitor1 = new AttributeVisitor(parseRes);
 			List<VariableDeclaration> attributes = 
 					ctx
@@ -419,8 +419,8 @@ public class Visitors {
 					.collect(Collectors.toList());
 			ExtendedClass res = ModelBuilder.singleton.buildExtendedClass(name,attributes,operations);
 			
-			if(ctx.Qualified().size() == 2 ){
-				String extendName = ctx.Qualified().get(1).getText();
+			if(ctx.qualified().size() == 2 ){
+				String extendName = ctx.qualified().get(1).getText();
 				if(ModelBuilder.isQualified(extendName)){
 					String xtdName = ModelBuilder.getLastSegment(extendName);
 					String qualifying = ModelBuilder.getQualifyingPart(extendName);
@@ -461,11 +461,11 @@ public class Visitors {
 			}
 			
 			String typeName = null;
-			if(ctx.Qualified() == null){ // String type
+			if(ctx.qualified() == null){ // String type
 				typeName = ctx.children.get(0).toString();
 			}
 			else{
-				typeName = ctx.Qualified().getText();
+				typeName = ctx.qualified().getText();
 			}
 			
 			String name = ctx.Ident().getText();
@@ -545,7 +545,7 @@ public class Visitors {
 			.rImportSemantic()
 			.stream()
 			.forEach(importCtx -> {
-				String behaviorID = importCtx.Qualified().getText();
+				String behaviorID = importCtx.qualified().getText();
 				String behaviorNs = importCtx.Ident().get(0).getText();
 				String importPkgNs = importCtx.Ident().get(1).getText();
 				String currentPkgNs = importCtx.Ident().get(2).getText();
