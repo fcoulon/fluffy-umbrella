@@ -94,13 +94,22 @@ public interface ImplementationPackage extends EPackage {
 	int MODEL_BEHAVIOR__IMPORT_SYNTAXES = 2;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_BEHAVIOR__NAME = 3;
+
+	/**
 	 * The number of structural features of the '<em>Model Behavior</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_BEHAVIOR_FEATURE_COUNT = 3;
+	int MODEL_BEHAVIOR_FEATURE_COUNT = 4;
 
 	/**
 	 * The number of operations of the '<em>Model Behavior</em>' class.
@@ -1066,6 +1075,17 @@ public interface ImplementationPackage extends EPackage {
 	EReference getModelBehavior_ImportSyntaxes();
 
 	/**
+	 * Returns the meta object for the attribute '{@link implementation.ModelBehavior#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see implementation.ModelBehavior#getName()
+	 * @see #getModelBehavior()
+	 * @generated
+	 */
+	EAttribute getModelBehavior_Name();
+
+	/**
 	 * Returns the meta object for class '{@link implementation.ExtendedClass <em>Extended Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1752,6 +1772,14 @@ public interface ImplementationPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MODEL_BEHAVIOR__IMPORT_SYNTAXES = eINSTANCE.getModelBehavior_ImportSyntaxes();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MODEL_BEHAVIOR__NAME = eINSTANCE.getModelBehavior_Name();
 
 		/**
 		 * The meta object literal for the '{@link implementation.impl.ExtendedClassImpl <em>Extended Class</em>}' class.

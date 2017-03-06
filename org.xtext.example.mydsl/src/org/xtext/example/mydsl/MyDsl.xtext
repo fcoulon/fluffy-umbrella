@@ -31,7 +31,7 @@ rImportService : 'import' 'service' Qualified ';'
 rClass : 'class' (syntax=[ImportSyntax])'.'name=ID '{' attributes+=rAttribute* operations+=rOperation* '}'
 ; 
 
-rOperation : rTag* ('def' | 'override') type=ID name=ID '(' paramList+=rParameters? ')' body=rBlock
+rOperation : rTag* ('def' | 'override') type=Qualified name=ID '(' paramList+=rParameters? ')' body=rBlock
 ;
 
 rTag : '@'ID
@@ -40,10 +40,10 @@ rTag : '@'ID
 rParameters : params+=rVariable (',' params+=rVariable)*
 ;
 
-rVariable : type=ID name=ID
+rVariable : type=Qualified name=ID
 ;
 
-rAttribute : type=ID name=ID (':=' expression)? ';'
+rAttribute : type=Qualified name=ID (':=' expression)? ';'
 ;
 
 rStatement : rVarDecl 

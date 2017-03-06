@@ -7178,9 +7178,9 @@ rule__ROperation__TypeAssignment_2
 	}
 :
 	(
-		{ before(grammarAccess.getROperationAccess().getTypeIDTerminalRuleCall_2_0()); }
-		RULE_ID
-		{ after(grammarAccess.getROperationAccess().getTypeIDTerminalRuleCall_2_0()); }
+		{ before(grammarAccess.getROperationAccess().getTypeQualifiedParserRuleCall_2_0()); }
+		ruleQualified
+		{ after(grammarAccess.getROperationAccess().getTypeQualifiedParserRuleCall_2_0()); }
 	)
 ;
 finally {
@@ -7268,9 +7268,9 @@ rule__RVariable__TypeAssignment_0
 	}
 :
 	(
-		{ before(grammarAccess.getRVariableAccess().getTypeIDTerminalRuleCall_0_0()); }
-		RULE_ID
-		{ after(grammarAccess.getRVariableAccess().getTypeIDTerminalRuleCall_0_0()); }
+		{ before(grammarAccess.getRVariableAccess().getTypeQualifiedParserRuleCall_0_0()); }
+		ruleQualified
+		{ after(grammarAccess.getRVariableAccess().getTypeQualifiedParserRuleCall_0_0()); }
 	)
 ;
 finally {
@@ -7298,9 +7298,9 @@ rule__RAttribute__TypeAssignment_0
 	}
 :
 	(
-		{ before(grammarAccess.getRAttributeAccess().getTypeIDTerminalRuleCall_0_0()); }
-		RULE_ID
-		{ after(grammarAccess.getRAttributeAccess().getTypeIDTerminalRuleCall_0_0()); }
+		{ before(grammarAccess.getRAttributeAccess().getTypeQualifiedParserRuleCall_0_0()); }
+		ruleQualified
+		{ after(grammarAccess.getRAttributeAccess().getTypeQualifiedParserRuleCall_0_0()); }
 	)
 ;
 finally {

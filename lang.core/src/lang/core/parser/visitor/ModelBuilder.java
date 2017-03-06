@@ -12,6 +12,7 @@ import org.eclipse.acceleo.query.ast.SequenceInExtensionLiteral;
 import org.eclipse.acceleo.query.runtime.IQueryBuilderEngine.AstResult;
 import org.eclipse.acceleo.query.runtime.IQueryEnvironment;
 import org.eclipse.acceleo.query.runtime.impl.QueryBuilderEngine;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EOperation;
@@ -33,7 +34,9 @@ import implementation.If;
 import implementation.Implementation;
 import implementation.ImplementationFactory;
 import implementation.ImplementationPackage;
+import implementation.ImportSyntax;
 import implementation.Method;
+import implementation.ModelBehavior;
 import implementation.Parameter;
 import implementation.Statement;
 import implementation.VariableAssignment;
@@ -211,11 +214,17 @@ public class ModelBuilder {
 		return featSetting;
 	}
 	
-	public ExtendedClass buildExtendedClass(String baseCls, List<VariableDeclaration> vars, List<Behaviored> operations) {
-		ExtendedClass cls = factory.createExtendedClass();
-		EClassifier resolvedType = resolve(baseCls);
-		if(resolvedType instanceof EClass)
-			cls.setBaseClass((EClass)resolvedType);
+	public ExtendedClass buildExtendedClass(final String baseCls, final List<VariableDeclaration> vars,
+			final List<Behaviored> operations, final ModelBehavior modelBehavior) {
+		final ExtendedClass cls = factory.createExtendedClass();
+		final EList<ImportSyntax> importSyntaxes = modelBehavior.getImportSyntaxes();
+		final Optional<ImportSyntax> value = importSyntaxes.stream().filter(syntax -> syntax.getName().equals(baseCls.split("\\.")[0])).findAny();
+		if(value.isPresent()){
+			cls.setSyntax(value.get());
+		}
+		final EClassifier resolvedType = resolve(baseCls);
+		if (resolvedType instanceof EClass)
+			cls.setBaseClass((EClass) resolvedType);
 		cls.getMethods().addAll(operations);
 		cls.getAttributes().addAll(vars);
 		return cls;

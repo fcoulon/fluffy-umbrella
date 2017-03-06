@@ -69,7 +69,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     rAttribute returns rAttribute
 	 *
 	 * Constraint:
-	 *     (type=ID name=ID)
+	 *     (type=Qualified name=ID)
 	 */
 	protected void sequence_rAttribute(ISerializationContext context, rAttribute semanticObject) {
 		if (errorAcceptor != null) {
@@ -79,7 +79,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.RATTRIBUTE__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getRAttributeAccess().getTypeIDTerminalRuleCall_0_0(), semanticObject.getType());
+		feeder.accept(grammarAccess.getRAttributeAccess().getTypeQualifiedParserRuleCall_0_0(), semanticObject.getType());
 		feeder.accept(grammarAccess.getRAttributeAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
 		feeder.finish();
 	}
@@ -123,7 +123,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     rOperation returns rOperation
 	 *
 	 * Constraint:
-	 *     (type=ID name=ID paramList+=rParameters? body=rBlock)
+	 *     (type=Qualified name=ID paramList+=rParameters? body=rBlock)
 	 */
 	protected void sequence_rOperation(ISerializationContext context, rOperation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -159,7 +159,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     rVariable returns rVariable
 	 *
 	 * Constraint:
-	 *     (type=ID name=ID)
+	 *     (type=Qualified name=ID)
 	 */
 	protected void sequence_rVariable(ISerializationContext context, rVariable semanticObject) {
 		if (errorAcceptor != null) {
@@ -169,7 +169,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.RVARIABLE__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getRVariableAccess().getTypeIDTerminalRuleCall_0_0(), semanticObject.getType());
+		feeder.accept(grammarAccess.getRVariableAccess().getTypeQualifiedParserRuleCall_0_0(), semanticObject.getType());
 		feeder.accept(grammarAccess.getRVariableAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
 		feeder.finish();
 	}
