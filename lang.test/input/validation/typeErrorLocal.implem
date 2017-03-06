@@ -1,3 +1,4 @@
+behavior test.typelocal;
 class EClass {
 	def void op(String foo){
 		String wrong := 0;

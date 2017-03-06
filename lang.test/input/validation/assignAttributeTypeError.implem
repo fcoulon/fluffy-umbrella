@@ -1,3 +1,4 @@
+behavior test.assignAttr;
 class EClass {
 	String localVar;
 	def void op(){

@@ -1,3 +1,4 @@
+behavior test.typeattr;
 class EClass {
 	int correct := 0;
 	String wrong := 0;

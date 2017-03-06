@@ -1,3 +1,4 @@
+behavior test.assignparam;
 class EClass {
 	def void op(int param){
 		param := 11;

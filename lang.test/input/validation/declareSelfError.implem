@@ -1,3 +1,4 @@
+behavior test.declself;
 class EClass {
 	int self := 5;
 	def int op(int self){

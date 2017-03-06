@@ -1,3 +1,4 @@
+behavior test.scopelocal;
 class EClass {
 	def void op(){
 		int localVar;

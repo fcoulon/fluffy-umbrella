@@ -1,3 +1,4 @@
+behavior test.featrm;
 class EClass {
 	def void op(){
 		self.eSuperTypes.remove('foobar');

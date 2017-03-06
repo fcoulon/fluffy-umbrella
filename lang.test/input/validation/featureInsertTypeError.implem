@@ -1,3 +1,4 @@
+behavior test.featins;
 class EClass {
 	def void op(){
 		self.eSuperTypes.add('foobar');

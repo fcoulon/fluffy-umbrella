@@ -1,3 +1,4 @@
+behavior test.declres;
 class EClass {
 	int result := 5;
 	def int op(int result){

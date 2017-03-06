@@ -1,3 +1,4 @@
+behavior test.attlocal;
 class EClass {
 	int foo := 0;
 	def void op(String foo){

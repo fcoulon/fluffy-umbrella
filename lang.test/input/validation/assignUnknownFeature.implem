@@ -1,3 +1,4 @@
+behavior test.assignfeat;
 class EClass {
 	def void op(){
 		self.wrong := 'foobar';

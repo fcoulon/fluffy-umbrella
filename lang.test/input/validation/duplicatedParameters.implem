@@ -1,3 +1,4 @@
+behavior doubleparam;
 class EClass {
 	def void op(int param, string param){
 	}

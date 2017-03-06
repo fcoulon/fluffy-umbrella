@@ -1,3 +1,4 @@
+behavior test.dynaattr;
 class ClassA {
 	
 	String attrib = "foo";

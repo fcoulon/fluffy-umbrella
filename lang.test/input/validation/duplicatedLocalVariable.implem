@@ -1,3 +1,4 @@
+behavior test.doublelocal; 
 class EClass {
 	def void op(){
 		int localVar;
