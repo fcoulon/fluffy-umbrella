@@ -1,4 +1,6 @@
-use logo.example.service.Display;
+behavior logo.implem;
+
+import service logo.example.service.Display;
 
 class LogoProgram {
 
