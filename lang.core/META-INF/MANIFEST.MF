@@ -10,10 +10,11 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: implementation,
  implementation.impl,
  implementation.util,
- lang.core.parser,
- lang.core.parser.visitor,
  lang.core.interpreter,
  lang.core.interpreter.services,
+ lang.core.parser,
+ lang.core.parser.visitor,
+ lang.core.resource,
  lang.core.validation
 Require-Bundle: org.antlr.runtime,
  org.eclipse.emf.ecore.xmi,
