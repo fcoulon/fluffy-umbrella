@@ -304,8 +304,10 @@ public class Services {
     	final TransactionalEditingDomain editingDomain = session.getTransactionalEditingDomain();
 		ResourceSet rs = editingDomain.getResourceSet();
 		
-    	URI uri = cls.eResource().getURI();
-    	URI implemURI = uri.trimFileExtension().appendFileExtension(IMPLEM_EXTENSION+"."+RESOURCE_SUFFIX);
+		IFile sessionFile = WorkspaceSynchronizer.getFile(session.getSessionResource());
+		String projectName = sessionFile.getProject().getName();
+		URI implemURI = session.getSessionResource().getURI().trimSegments(1).appendSegment(projectName).appendFileExtension(DSL_EXTENSION);
+    	
     	
     	Optional<Resource> implemSearch = 
 			session
@@ -335,7 +337,9 @@ public class Services {
 		ResourceSet rs = editingDomain.getResourceSet();
 		
     	URI uri = cls.eResource().getURI();
-    	URI implemURI = uri.trimFileExtension().appendFileExtension(IMPLEM_EXTENSION+"."+RESOURCE_SUFFIX);
+    	IFile sessionFile = WorkspaceSynchronizer.getFile(session.getSessionResource());
+		String projectName = sessionFile.getProject().getName();
+    	URI implemURI = session.getSessionResource().getURI().trimSegments(1).appendSegment(projectName).appendFileExtension(DSL_EXTENSION);
     	
     	Optional<Resource> implemSearch = 
 			session

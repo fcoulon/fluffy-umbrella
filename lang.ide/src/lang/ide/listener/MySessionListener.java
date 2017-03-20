@@ -37,8 +37,11 @@ import org.eclipse.sirius.viewpoint.description.Viewpoint;
 
 import implementation.ImplementationPackage;
 import implementation.ModelBehavior;
+import lang.LangInterpreter;
 import lang.core.parser.AstBuilder;
 import lang.core.parser.visitor.ParseResult;
+import lang.core.resource.AntlrResourceFactory;
+import lang.ide.resource.WorkbenchResourceFactory;
 import lang.ide.services.Services;
 
 public class MySessionListener implements SessionManagerListener{
@@ -46,53 +49,11 @@ public class MySessionListener implements SessionManagerListener{
 	public static final String ECORE_VP_EXTENSION = "MyExtension";
 	public static final String IMPLEM_EXTENSION = "mydsl";
 	public static final String DSL_EXTENSION = "dsl";
-	public static final String RESOURCE_SUFFIX = "transient";
 
 	@Override
 	public void notifyAddSession(Session newSession) {
 		
-//		Optional<RepresentationExtensionDescription> searchEntityExt =
-//				selectedSirius
-//				.getOwnedRepresentationExtensions()
-//				.stream()
-//				.filter(ext -> ext.getName().equals(ECORE_VP_EXTENSION))
-//				.findFirst();
-//			
-//			if(searchEntityExt.isPresent()){
-				//Check implem
-				
-//				Iterator<DView> it = newSession.getOwnedViews().iterator();
-//				it.next().getOwnedRepresentationDescriptors().get(0).getName();//TODO
-				
-				Set<Resource> allModels = 
-					newSession
-					.getOwnedViews()
-					.stream()
-					.flatMap(elem -> elem.getModels().stream())
-					.filter(elem -> elem instanceof EPackage)
-					.map(elem -> elem.eResource())
-					.collect(Collectors.toSet());
-				
-//				TransactionalEditingDomain editingDomain = newSession.getTransactionalEditingDomain();
-//				ResourceSet rs = editingDomain.getResourceSet();
-				
-				allModels.forEach(ecoreRes -> {
-					Services.reloadModelBehavior(newSession, ecoreRes);
-//					URI uri = ecoreRes.getURI();
-//					URI implemURI = uri.trimFileExtension().appendFileExtension(IMPLEM_EXTENSION);
-//					List<EPackage> pkgs = getMetamodel(ecoreRes);
-//					
-//					String relativeURI = implemURI.toPlatformString(true);
-//					String fullURI = ResourcesPlugin.getWorkspace().getRoot().getLocation()+relativeURI;
-//					
-//					ModelBehavior behavior = loadBehavior(fullURI,pkgs).getRoot();
-				});
-				
-				
-				//Create implem + listener
-				
-				//Reload implem
-//			}
+		initEnvironment(newSession);
 		
 		System.out.println("Session is added");
 	}
@@ -119,53 +80,13 @@ public class MySessionListener implements SessionManagerListener{
 		System.out.println("Session is notified");
 	}
 	
-	private List<EPackage> getMetamodel(Resource ecoreRes) {
-		List<EPackage> res = new ArrayList<EPackage>();
-		ecoreRes.getAllContents().forEachRemaining(e -> {
-			if(e instanceof EPackage){
-				res.add((EPackage) e);
-			}
-		});
-		return res;
+	private void initEnvironment(Session session) {
+		final TransactionalEditingDomain editingDomain = session.getTransactionalEditingDomain();
+		ResourceSet rs = editingDomain.getResourceSet();
+		
+		LangInterpreter interpreter = new LangInterpreter();
+		rs.getResourceFactoryRegistry()
+			.getExtensionToFactoryMap()
+			.put("dsl", new WorkbenchResourceFactory(interpreter.getQueryEnvironment(),rs));
 	}
-	
-//	private ParseResult<ModelBehavior> loadBehavior(String filePath, List<EPackage> pkgs) {
-//		String content = getFileContent(filePath);
-//		
-//		IQueryEnvironment queryEnvironment = Query.newEnvironmentWithDefaultServices(null);
-//		queryEnvironment.registerEPackage(ImplementationPackage.eINSTANCE);
-//		queryEnvironment.registerEPackage(AstPackage.eINSTANCE);
-//		pkgs.stream().forEach(pkg -> queryEnvironment.registerEPackage(pkg));
-//		return (new AstBuilder(queryEnvironment)).parse(content);
-//	}
-//	
-//	private static String getFileContent(String implementionPath){
-//		String fileContent = "";
-//		try {
-//			fileContent = new String(Files.readAllBytes(Paths.get(implementionPath)));
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		return fileContent;
-//	}
-//	
-//	/**
-//	 * Create a .mydsl file based an the ecoreResource's URI.
-//	 * Do nothing if already there
-//	 */
-//	private void createImplemFile(Resource ecoreResource) {
-//		IFile file = WorkspaceSynchronizer.getFile(ecoreResource);
-//		IPath dslPath = file.getFullPath().removeFileExtension().addFileExtension(IMPLEM_EXTENSION);
-//		IWorkspaceRoot ws = ResourcesPlugin.getWorkspace().getRoot();
-//		IFile implemFile = ws.getFile(dslPath);
-//		if(!implemFile.exists()){
-//			String emptyContent = "";
-//			InputStream source = new ByteArrayInputStream(emptyContent.getBytes());
-//			try {
-//				implemFile.create(source, true, new NullProgressMonitor());
-//			} catch (CoreException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//	}
 }
