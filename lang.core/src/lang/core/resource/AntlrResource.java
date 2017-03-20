@@ -17,8 +17,8 @@ import lang.core.parser.visitor.ParseResult;
 
 public class AntlrResource extends ResourceImpl{
 
-	DslBuilder parser;
-	List<ParseResult<ModelBehavior>> parseResult;
+	protected DslBuilder parser;
+	protected List<ParseResult<ModelBehavior>> parseResult;
 	
 	public AntlrResource(URI uri, DslBuilder parser) {
 		super(uri);

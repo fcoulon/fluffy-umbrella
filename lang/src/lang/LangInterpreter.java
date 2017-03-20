@@ -116,7 +116,7 @@ public class LangInterpreter {
     	/*
     	 * Parse semantic files
     	 */
-    	List<ParseResult<ModelBehavior>> parsedSemantics = (new DslBuilder(queryEnvironment)).parse(dsl);
+    	List<ParseResult<ModelBehavior>> parsedSemantics = (new DslBuilder(queryEnvironment,new ResourceSetImpl())).parse(dsl);
     	
     	/*
     	 * Load input model

@@ -1,6 +1,7 @@
 package lang.ide;
 
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import org.eclipse.core.resources.IResource;
@@ -14,6 +15,11 @@ public class WorkbenchDsl extends Dsl {
 
 	public WorkbenchDsl(String dslFile) throws FileNotFoundException {
 		super(dslFile);
+		resolveUris();
+	}
+	
+	public WorkbenchDsl(InputStream input) {
+		super(input);
 		resolveUris();
 	}
 	

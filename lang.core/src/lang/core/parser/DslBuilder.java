@@ -26,9 +26,11 @@ import lang.core.parser.visitor.Visitors;
 public class DslBuilder {
 	
 	IQueryEnvironment queryEnvironment;
+	ResourceSet rs;
 	
-	public DslBuilder(IQueryEnvironment qryEnv) {
+	public DslBuilder(IQueryEnvironment qryEnv, ResourceSet rs) {
 		this.queryEnvironment = qryEnv;
+		this.rs = rs;
 	}
 
 	/**
@@ -38,7 +40,6 @@ public class DslBuilder {
     	/*
     	 * Register EPackages
     	 */
-    	ResourceSet rs = new ResourceSetImpl();
     	rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl());
     	dsl.getAllSyntaxes()
     		.stream()
