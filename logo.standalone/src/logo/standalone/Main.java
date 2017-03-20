@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -18,6 +19,7 @@ import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -35,6 +37,8 @@ import lang.core.interpreter.DiagnosticLogger;
 import lang.core.interpreter.ImplementationEvaluator;
 import lang.core.parser.Dsl;
 import lang.core.parser.visitor.ParseResult;
+import lang.core.resource.AntlrResource;
+import lang.core.resource.AntlrResourceFactory;
 import vmlogo.VmlogoPackage;
 
 public class Main {
@@ -45,6 +49,33 @@ public class Main {
 		 */
 		String dslFile = "logo-standalone.dsl";
 		String modelFile = "../logo.example/data/LogoProgram.xmi";
+		
+//		/*
+//		 * Init eval environment
+//		 */
+//		LangInterpreter interpreter = new LangInterpreter();
+//		try {
+//			ServiceUtils.registerServices(
+//					interpreter.getQueryEnvironment(),
+//					ServiceUtils.getServices(interpreter.getQueryEnvironment(),	Class.forName("logo.example.service.Display"))
+//					);
+//		} catch (ClassNotFoundException e) {
+//			e.printStackTrace();
+//		}
+//		/*
+//		 * Eval
+//		 */
+//		try {
+//			IEvaluationResult result = interpreter.eval(modelFile, new ArrayList(), new Dsl(dslFile));
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		}
+		
+		
+		/* --------------------------------------
+		 *  Load behaviors thanks to EMF factory
+		 * --------------------------------------/
+		
 		
 		/*
 		 * Init eval environment
@@ -58,9 +89,28 @@ public class Main {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		
+		/*
+		 * Load behavior
+		 */
+		ResourceSet modelRs = new ResourceSetImpl();
+    	modelRs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("dsl", new AntlrResourceFactory(interpreter.getQueryEnvironment()));
+    	URI uri = URI.createURI(dslFile);
+		AntlrResource resource = (AntlrResource) modelRs.getResource(uri, true);
+		
+		/*
+		 * Load model
+		 */
+		Resource model = interpreter.loadModel(modelFile);
+		EObject caller = model.getContents().get(0);
+		
 		/*
 		 * Eval
 		 */
-		IEvaluationResult result = interpreter.eval(modelFile, new ArrayList(), new Dsl(dslFile));
+		List<ParseResult<ModelBehavior>> parsedSemantics = resource.getParseResult();
+		interpreter.eval(caller,new ArrayList<Object>(),parsedSemantics);
+		
+		
+		System.out.println("End");
 	}
 }
